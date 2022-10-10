@@ -1,9 +1,25 @@
-import "./Navbar.css";
+import React from 'react'
+import "./Navbar.css"
+import {useThemeContext} from "../../theme/ThemeProvider"
 
-const Navbar = (props) => {
+export const Navbar = () => {
+  const { theme, changeTheme } = useThemeContext();
+
+  const handleNavbarClick = () => {
+    changeTheme(theme === "light" ? "dark" : "light");
+  }
+  
   return (
-    <div>{props.theplu} {props.deplu}</div>
-  );
-};
-
-export default Navbar;
+    <>
+        <div className="navbar-container">
+            <div className="navbar-title">Strings</div>
+            <div className="navbar-links">
+                <ul>
+                    <li onClick={handleNavbarClick}>Dark Mode Toggle</li>
+                    <li>Profile</li>
+                </ul>
+            </div>
+        </div>
+    </>
+  )
+}
