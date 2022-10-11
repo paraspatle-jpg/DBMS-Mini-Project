@@ -8,10 +8,9 @@ function App() {
   return (
     <div className="App">
       <Navbar/>
-
-      <Navbar1 theplu={name} deplu={name}/>
+      {/* <Navbar1 theplu={name} deplu={name}/>
       <button onClick={()=>setName("Tanu")}>Click me</button>
-      <Body />
+      <Body /> */}
     </div>
   );
 }
