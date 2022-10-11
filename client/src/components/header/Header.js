@@ -1,8 +1,8 @@
 import React from 'react'
-import "./Navbar.css"
+import "./Header.css"
 import {useThemeContext} from "../../theme/ThemeProvider"
 
-export const Navbar = () => {
+export const Header = () => {
   const { theme, changeTheme } = useThemeContext();
 
   const handleNavbarClick = () => {

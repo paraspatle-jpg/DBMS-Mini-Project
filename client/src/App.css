@@ -2,3 +2,21 @@
   
 }
 
+.side-nav-container{
+    width:20%;
+    display: inline-block;
+    position:absolute;
+    top:0;
+    height:100vh;
+    z-index:-1;
+    color:#fff;
+    background:black;
+}
+
+.side-nav-links-container{
+    margin-top:70px;
+}
+
+.router-container{
+    margin-left:20%;
+}
