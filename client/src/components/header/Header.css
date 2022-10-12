@@ -27,3 +27,22 @@
     display: inline-block;
     margin-right:20px;
 }
+.switch {
+    display: flex;
+    top:10px;
+    right: 70px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .switch label {
+    margin: 10px;
+  }
+  
+  #light .switch label {
+    color: black;
+  }
+  
+  #dark .switch label {
+    color: white;
+  }
