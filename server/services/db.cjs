@@ -16,15 +16,15 @@ pool.on("connect", (client) => {
 });
 
 const createTables = () => {
-  const schoolTable = `CREATE TABLE IF NOT EXISTS
-      students(
-        id SERIAL PRIMARY KEY,
-        student_name VARCHAR(128) NOT NULL,
-        student_age INT NOT NULL,
-        student_class VARCHAR(128) NOT NULL,
-        parent_contact VARCHAR(128) NOT NULL,
-        admission_date VARCHAR(128) NOT NULL
-      )`;
+  const userTable = `create table user_info(
+    user_id number(8) primary key,
+    name varchar2(128) not null,
+    email_id varchar2(128) not null,
+    password varchar2(16) not null check (length(password)>8),
+    street_address varchar2(128),
+    date_of_birth date,
+    artist_or_not varchar2(1) not null
+  )`;
   pool
     .query(schoolTable)
     .then((res) => {
