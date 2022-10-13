@@ -16,17 +16,17 @@ pool.on("connect", (client) => {
 });
 
 const createTables = () => {
-  const schoolTable = `CREATE TABLE IF NOT EXISTS
-      students(
-        id SERIAL PRIMARY KEY,
-        student_name VARCHAR(128) NOT NULL,
-        student_age INT NOT NULL,
-        student_class VARCHAR(128) NOT NULL,
-        parent_contact VARCHAR(128) NOT NULL,
-        admission_date VARCHAR(128) NOT NULL
-      )`;
+  const userTable = `create table user_info(
+    user_id int primary key,
+    name varchar(128) not null,
+    email_id varchar(128) not null,
+    password varchar(16) not null check (length(password)>8),
+    street_address varchar(128),
+    date_of_birth date,
+    artist_or_not varchar(1) not null
+  )`;
   pool
-    .query(schoolTable)
+    .query(userTable)
     .then((res) => {
       console.log(res);
       pool.end();
@@ -35,6 +35,7 @@ const createTables = () => {
       console.log(err);
       pool.end();
     });
+    
 };
 
 //export pool and createTables to be accessible  from an where within the application
