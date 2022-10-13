@@ -1,0 +1,46 @@
+h2{
+    font-size:30px;
+    font-weight:normal;
+    word-wrap:break-word;
+    padding:10px;
+  }
+
+  *{
+    font-family:sans;
+    margin:0;
+    color:#444444;
+  }
+  
+  a{
+    color:#333333;
+    text-decoration:none;
+    display:block;
+    border-top:1px solid #c2b8b8;
+  }
+  
+  #Reference a{
+    color:blue;
+    text-decoration:underline;
+    display:inline-block;
+    border:none;
+  }
+  
+  #navbar{
+  margin:0 0 10px 0;
+  padding:0;
+  position:fixed;
+  display:inline-block;
+  height:100%;
+  overflow:auto;
+  width:20%;
+  background:#F5F5F5;
+  }
+  
+  .nav-link{
+  padding:5%;
+  }
+  
+  .nav-link:hover{
+  background-color:#353839;
+  color:#EFEFEF;
+  }
