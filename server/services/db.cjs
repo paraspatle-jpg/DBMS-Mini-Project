@@ -24,7 +24,8 @@ const createTables = () => {
     street_address varchar(128),
     date_of_birth date,
     artist_or_not varchar(1) not null
-  )`;
+  )
+  `;
   pool
     .query(userTable)
     .then((res) => {
