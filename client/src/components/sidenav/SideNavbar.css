@@ -6,12 +6,17 @@ h2{
   }
 
   *{
-    font-family:sans;
+    font-family:sans-serif;
     margin:0;
     color:#444444;
   }
   
   a{
+    color:#333333;
+    text-decoration:none;
+    display:block;
+  }
+  Link{
     color:#333333;
     text-decoration:none;
     display:block;
