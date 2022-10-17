@@ -24,8 +24,13 @@ const createTables = () => {
     street_address varchar(128),
     date_of_birth date,
     artist_or_not varchar(1) not null
-  )
-  `;
+    );
+    create sequence user_id_seq
+    start with 1
+    increment by 1
+    minvalue 0
+    maxvalue 2147483647
+    cycle;`;
   pool
     .query(userTable)
     .then((res) => {
@@ -36,7 +41,6 @@ const createTables = () => {
       console.log(err);
       pool.end();
     });
-    
 };
 
 //export pool and createTables to be accessible  from an where within the application
