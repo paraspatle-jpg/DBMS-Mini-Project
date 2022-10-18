@@ -10,13 +10,6 @@
     margin-top: 40px;
   }
   
-  a {
-    text-decoration: none;
-    font-weight: bold;
-    color: black;
-    font-size: larger;
-  }
-  
   label {
     /* color: #fff; */
     font-size: 2.3em;
@@ -37,7 +30,7 @@
     width: 30%;
     /* width: 350px; */
     height: 600px;
-    background-color: #d199d1;
+    background-color: #a323c7;
     border-radius: 10px;
     box-shadow: 5px 20px 50px #000;
     display: flex;

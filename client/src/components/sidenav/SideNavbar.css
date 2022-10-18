@@ -25,8 +25,12 @@ h2{
   .nav-link{
   padding:5%;
   color:#333333;
-    text-decoration:none;
-    display:block;
+  text-decoration:none;
+  display:block;
+  text-decoration: none;
+    font-weight: bold;
+    color: black;
+    font-size: large;
   }
   
   .nav-link:hover{

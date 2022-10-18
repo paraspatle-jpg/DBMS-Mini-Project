@@ -17,7 +17,7 @@ pool.on("connect", (client) => {
 
 const createTables = () => {
   const userTable = `create table user_info(
-    user_id int primary key,
+    user_id int serial primary key,
     name varchar(128) not null,
     email_id varchar(128) not null unique,
     password varchar(16) not null check (length(password)>8),
@@ -25,12 +25,13 @@ const createTables = () => {
     date_of_birth date,
     artist_or_not varchar(1) not null default 0
     );
-    create sequence user_id_seq
-    start with 1
-    increment by 1
-    minvalue 0
-    maxvalue 2147483647
-    cycle;`;
+    
+    create table friends(
+      user_id int ,
+      friend_id int ,
+      primary key(user_id,friend_id)
+    );
+    `;
   pool
     .query(userTable)
     .then((res) => {
