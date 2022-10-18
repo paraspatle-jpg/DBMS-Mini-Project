@@ -6,16 +6,26 @@
     padding-left: 20px;
     border-radius: 30px;
     border:1px solid black;
+    max-height:45px;
   }
-  
+
+  .white{
+    color:white;
+  }
+
   .element {
-    margin-top: 40px;
+    margin-top: 30px;
+    color:black;
   }
   
+  ::placeholder{
+    font-size:15px;
+  }
+
   .last {
     text-decoration: none;
     font-weight: Normal;
-    color: black;
+    color: white;
     font-size: 16px;
   }
   
@@ -35,7 +45,6 @@
   
   .submit-button{
     margin-top:20px;
-    text-align:center;
   }
 
   .main {
@@ -44,7 +53,7 @@
     width: 25%;
     /* width: 350px; */
     height: 60%;
-    background-color:#a809d4 ;
+    background:linear-gradient(to bottom right,#8b16ac,#c64ce7) ;
     border-radius: 10px;
     box-shadow: 5px 20px 50px #000;
     display: flex;

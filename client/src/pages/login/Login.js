@@ -5,7 +5,7 @@ import './login.css'
 export const Login = () => {
   return (
     <div className="main">
-    <label htmlFor="chk" >Login</label>
+    <label htmlFor="chk" className="white " >Login</label>
     <input className="main-elements" type="email" name="email" placeholder="Email" required="" />
     <input className="main-elements" type="password" name="pswd" placeholder="Password" required="" />
     <button className="main-elements submit-button" style={{ width: '60%' }} id="login" type="button" >Login</button>
