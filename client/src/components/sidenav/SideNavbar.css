@@ -11,17 +11,6 @@ h2{
     color:#444444;
   }
   
-  a{
-    color:#333333;
-    text-decoration:none;
-    display:block;
-  }
-  Link{
-    color:#333333;
-    text-decoration:none;
-    display:block;
-  }
-  
   #navbar{
   margin:0 0 10px 0;
   padding:0;
@@ -35,6 +24,9 @@ h2{
   
   .nav-link{
   padding:5%;
+  color:#333333;
+    text-decoration:none;
+    display:block;
   }
   
   .nav-link:hover{

@@ -4,19 +4,19 @@ import './SideNavbar.css'
 export const SideNavbar = () => {
   return (
     <nav id="navbar">
-          <a className="nav-link">Home</a>
+          <Link to="/home" className="nav-link">Home</Link>
 
-          <a className="nav-link"><Link to="/Login">Login</Link></a>
+          <Link to="/login" className="nav-link">Login</Link>
        
-          <a className="nav-link"><Link to="/SignUp">SignUp</Link></a>
+          <Link to="/signUp" className="nav-link">SignUp</Link>
         
-          <a className="nav-link" >Playlist</a>
+          <Link to="/playlist" className="nav-link" >Playlist</Link>
         
-          <a className="nav-link">Favourites</a>
+          <Link to="/favourites" className="nav-link" >Favourites</Link>
         
-          <a className="nav-link">Chat</a>
+          <Link to="/chat" className="nav-link">Chat</Link>
         
-          <a className="nav-link">Find a Friend</a>
+          <Link to="/find-a-friend" className="nav-link">Find a Friend</Link>
       </nav>
   )
 }
