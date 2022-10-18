@@ -19,11 +19,11 @@ const createTables = () => {
   const userTable = `create table user_info(
     user_id int primary key,
     name varchar(128) not null,
-    email_id varchar(128) not null,
+    email_id varchar(128) not null unique,
     password varchar(16) not null check (length(password)>8),
     street_address varchar(128),
     date_of_birth date,
-    artist_or_not varchar(1) not null
+    artist_or_not varchar(1) not null default 0
     );
     create sequence user_id_seq
     start with 1
