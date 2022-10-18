@@ -6,15 +6,9 @@ h2{
   }
 
   *{
-    font-family:sans;
+    font-family:sans-serif;
     margin:0;
     color:#444444;
-  }
-  
-  a{
-    color:#333333;
-    text-decoration:none;
-    display:block;
   }
   
   #navbar{
@@ -30,6 +24,9 @@ h2{
   
   .nav-link{
   padding:5%;
+  color:#333333;
+    text-decoration:none;
+    display:block;
   }
   
   .nav-link:hover{
