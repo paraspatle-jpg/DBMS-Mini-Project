@@ -57,4 +57,7 @@ label {
   min-width: 330px;
   margin: auto;
   margin-top:50px;
+  
+  position: absolute;
+  left: 40%;
 }
