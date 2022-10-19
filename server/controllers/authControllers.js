@@ -1,5 +1,7 @@
 import pool from "./../index.js";
+import dotenv from 'dotenv';
 import jwt from "jsonwebtoken";
+dotenv.config({});
 
 // import bcrypt from "bcrypt";
 
@@ -30,7 +32,7 @@ export const login = async (req, res) => {
     }
     const token = await jwt.sign(
       { user_id: user.rows[0].user_id },
-      process.env.JWT_SECRET_KEY
+      "hehehehe"
     );
     delete user.rows[0].password;
     return res
@@ -44,6 +46,7 @@ export const login = async (req, res) => {
 export const signup = async (req, res) => {
   try {
     const { username, email, password } = req.body;
+    console.log(req.body);
     const values1 = [username, email, password];
     console.log(username, email, password);
     const values2 = [email];
@@ -64,15 +67,17 @@ export const signup = async (req, res) => {
       "INSERT INTO user_info(name, email_id, password) VALUES($1,$2,$3) RETURNING *;",
       values1
     )
+    // console.log(process.env.JWT_SECRET_KEY);
     const token = jwt.sign(
       { user_id: newUser.rows[0].user_id },
-      process.env.JWT_SECRET_KEY
+      "hehehehe"
     );
     delete newUser.rows[0].password;
     res
       .status(200)
       .send({ user: newUser.rows[0], token, message: "Signup Success" });
   } catch (err) {
+    console.log(err);
     return res.status(500).send({ message: "Something Went wrong", err });
   }
 };

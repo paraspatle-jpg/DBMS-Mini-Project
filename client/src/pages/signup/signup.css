@@ -48,25 +48,19 @@
   }
 
   .main {
-    /* height: auto; */
-    /* border: 3px solid red; */
     width: 25%;
-    /* width: 350px; */
     height: 60%;
-    background:linear-gradient(to bottom right,#8b16ac,#c64ce7) ;
     border-radius: 10px;
+    border: 7px solid #000;
     box-shadow: 5px 20px 50px #000;
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    /* padding: 30px; */
     padding: 20px;
-    /* margin: 90%; */
-    /* margin: auto; */
     min-width: 330px;
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-15%, -50%);
   }
