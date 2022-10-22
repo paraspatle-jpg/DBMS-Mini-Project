@@ -7,6 +7,7 @@ import { SignUp } from "./pages/signup/SignUp";
 import { Homepage } from "./pages/homepage/Homepage";
 import { FindFriend } from "./pages/findFriend/FindFriend";
 
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
