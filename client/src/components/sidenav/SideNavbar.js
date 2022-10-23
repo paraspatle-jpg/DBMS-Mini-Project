@@ -49,7 +49,7 @@ export const SideNavbar = ({ auth, setAuth }) => {
         </span>
       </Link>
 
-      <Link to="/find-a-friend" className="nav-link">
+      <Link to="/findFriend" className="nav-link">
         <img className="navIcons" src={FindFriend} alt="home" />
         <span className="icon-name" style={{ display: toggle ? "" : "none" }}>
           Find a Friend
