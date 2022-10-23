@@ -10,7 +10,7 @@ export const addFriend = async (req, res) => {
 //on page load this will send list of friends
 export const getFriends = async (req, res) => {
   try {
-    const values = [req.user.user_id];
+    const values = [req.body.user_id];
     const friends = await pool.query(
       "SELECT * FROM user_info WHERE user_id IN (SELECT friend_id FROM friends WHERE user_id=$1)",
       values
