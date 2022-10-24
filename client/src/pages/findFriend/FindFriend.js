@@ -11,8 +11,8 @@ export const FindFriend = () => {
   ];
  
   const containerStyles = {
-    width: "500px",
-    height: "350px",
+    width: "800px",
+    height: "500px",
     margin: "0 auto",
   };
   return (

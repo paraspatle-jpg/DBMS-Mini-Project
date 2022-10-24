@@ -1,11 +1,13 @@
 import { useState } from "react";
-import "./FindFriend.css"
-const slideStyles = {
+import "./FindFriend.css";
+var slideStyles = {
   width: "100%",
   height: "100%",
   borderRadius: "10px",
   backgroundSize: "cover",
   backgroundPosition: "center",
+  opacity: "1",
+  transition: "all 0.5s ease",
 };
 
 const rightArrowStyles = {
@@ -48,15 +50,22 @@ const dotStyle = {
 
 const ImageSlider = ({ slides }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [opacity, setOpacity] = useState(1);
   const goToPrevious = () => {
     const isFirstSlide = currentIndex === 0;
     const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
     setCurrentIndex(newIndex);
   };
   const goToNext = () => {
-    const isLastSlide = currentIndex === slides.length - 1;
-    const newIndex = isLastSlide ? 0 : currentIndex + 1;
-    setCurrentIndex(newIndex);
+    setOpacity(0);
+    console.log(slideStyles.opacity);
+    setTimeout(() => {
+      const isLastSlide = currentIndex === slides.length - 1;
+      const newIndex = isLastSlide ? 0 : currentIndex + 1;
+      setCurrentIndex(newIndex);
+      setOpacity(1);
+      console.log(slideStyles.opacity);
+    }, 300);
   };
   const goToSlide = (slideIndex) => {
     setCurrentIndex(slideIndex);
@@ -64,10 +73,7 @@ const ImageSlider = ({ slides }) => {
   const slideStylesWidthBackground = {
     ...slideStyles,
     backgroundImage: `url(${slides[currentIndex].url})`,
-   
-
   };
-  
 
   return (
     <div style={sliderStyles}>
@@ -79,13 +85,12 @@ const ImageSlider = ({ slides }) => {
           ❱
         </div>
       </div>
-      <div style={slideStylesWidthBackground}>
-      <div className="artist-name">{slides[currentIndex].title}</div>
+      <div style={{ ...slideStylesWidthBackground, opacity: opacity }}>
+        <div className="artist-name">{slides[currentIndex].title}</div>
       </div>
-      
-      <div style={dotsContainerStyles}>
+
+      {/* <div style={dotsContainerStyles}>
         {slides.map((slide, slideIndex) => (
-          
           <div
             style={dotStyle}
             key={slideIndex}
@@ -94,12 +99,9 @@ const ImageSlider = ({ slides }) => {
             ●
           </div>
         ))}
-      </div>
-      <button className="follow unfollow-btn">
-                    Follow
-                  </button>
-     
-                  </div>
+      </div> */}
+      <button className="follow unfollow-btn">Follow</button>
+    </div>
   );
 };
 
