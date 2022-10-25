@@ -6,6 +6,7 @@ import { Login } from "./pages/login/Login";
 import { SignUp } from "./pages/signup/SignUp";
 import { Homepage } from "./pages/homepage/Homepage";
 import { FindFriend } from "./pages/findFriend/FindFriend";
+import { Chat } from "./pages/chat/Chat"
 
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -40,7 +41,12 @@ function App() {
             path="/findfriend"
             element={<FindFriend auth={auth} setAuth={setAuth} />}
           />
-        </Routes>
+        <Route
+            exact
+            path="/chat"
+            element={<Chat auth={auth} setAuth={setAuth} />}
+          />
+          </Routes>
       </div>
     </Router>
   );
