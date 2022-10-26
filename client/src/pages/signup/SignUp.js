@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import axios from "axios";
-
+import "./signup.css"
 
 export const SignUp = ({auth,setAuth}) => {
   const [user, setUser] = useState({ username: "", email: "", password: "" });
@@ -39,7 +39,7 @@ export const SignUp = ({auth,setAuth}) => {
   }
 
   return (
-    <div className="main">
+    <div className="main" style={{height: "70%"}}>
       <label htmlFor="chk" className="white">
         Sign Up
       </label>

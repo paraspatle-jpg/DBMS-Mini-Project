@@ -1,6 +1,7 @@
 import React from 'react'
 import "./FindFriend.css"
 import ImageSlider from "./ImageSlider";
+import MultiSlider from "./MultiSlider";
 export const FindFriend = () => {
   const slides = [
     { url: "https://media.istockphoto.com/photos/young-female-rockstar-singing-in-concert-picture-id1268215945?b=1&k=20&m=1268215945&s=170667a&w=0&h=yWiwtFTs2VbGD7X72HcDVllCQMBXjSQ-65ubA9z6aww=", title: "Taylor Swift" },
@@ -11,8 +12,8 @@ export const FindFriend = () => {
   ];
  
   const containerStyles = {
-    width: "500px",
-    height: "350px",
+    width: "800px",
+    height: "500px",
     margin: "0 auto",
   };
   return (
@@ -21,6 +22,7 @@ export const FindFriend = () => {
       <div style={containerStyles}>
         <ImageSlider slides={slides} />
       </div>
+      <MultiSlider/>
     </div>
   );
 }
