@@ -1,17 +1,14 @@
 .nav-link-chat{
-    color:#333333;
+    color:rgb(209, 202, 202);
     text-decoration:none;
     display:block;
     /* padding-top:5px; */
     width:100%;
     height:40px;
+    margin:10px 0 10px 0;
   }
 
 .header-chat{
-  background:#F5F5F5;
-  border:1px solid #f86b6b;
-  box-shadow:0 0 5px #f86b6b;
-  border-left-style:none;
   width:80%;
   position:relative;
   background-color:transparent;
@@ -26,8 +23,10 @@
 {
   width:100%;
   height:50px;
-  background-color:black;
+  background-color:transparent;
+  /* border:1px solid grey; */
   display:flex;
+  border-top:none;
 }
 
 .navbar-chat{
@@ -39,21 +38,19 @@
     height:100%;
     overflow:auto;
     width:19%;
-    background:#F5F5F5;
-    border:1px solid #f86b6b;
-    box-shadow:0 0 10px #f86b6b;
+    background:transparent;
     border-left-style:none;
     }
 
 .nav-link-chat:hover{
    background-color:black;
     color:#EFEFEF;
-    border:1px solid #f86b6b;
-    box-shadow:0 0 10px #f86b6b;
+    /* border:1px solid white;
+    box-shadow:0 0 10px white; */
     }
 
 .dp-chat{
-  border:1px solid black;
+  border:1px solid grey;
   background-color: white;
   border-radius:50%;
   width:30px;
@@ -68,7 +65,8 @@
   height:35px;
   margin:7px 19px;
   align-items: center;
-  background-color:white;
+  background-color:transparent;
+  border:1px solid #f86b6b;
   border-radius:15px;
 }
 
@@ -86,13 +84,13 @@
 }
 
 .type-chat{
-  background-color:white;
+  background-color:transparent;
   height:34px;
   margin:8px 10px;
   width:1000px;
   border-radius:34px;
   border:1px solid #f86b6b;
-  box-shadow:0 0 10px #f86b6b;
+  /* box-shadow:0 0 10px #f86b6b; */
 }
 
 .text-chat{

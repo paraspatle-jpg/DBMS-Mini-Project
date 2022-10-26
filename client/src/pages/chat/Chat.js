@@ -12,9 +12,9 @@ export const Chat = () => {
           <img className="navIcons-chat" src={FindFriend} alt="home" />
           </div>
         </div>
-        <div className="nav-link-chat" to="#">Paras</div>
-        <div className="nav-link-chat" to="#">Paras</div>
-        <div className="nav-link-chat" to="#">Paras</div>
+        <div className="nav-link-chat" to="#">Hehe</div>
+        <div className="nav-link-chat" to="#">Hehe</div>
+        <div className="nav-link-chat" to="#">Hehe</div>
       </div>
       <div className="messages-chat">
         <div className="header-chat">
