@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Home from "./../../assets/Home.svg";
-import Login from "./../../assets/Login.png";
-import SignUp from "./../../assets/SignUp.png";
-import Playlist from "./../../assets/Playlist.png";
-import FindFriend from "./../../assets/FindFriend.png";
-import Favourites from "./../../assets/Favourites.png";
-import Chat from "./../../assets/Chat.png";
+import Home from "./../../assets/Home.js";
+import Login from "./../../assets/Login.js";
+import SignUp from "./../../assets/SignUp.js";
+import Playlist from "./../../assets/Playlist.js";
+import FindFriend from "./../../assets/FindFriend.js";
+import Favourites from "./../../assets/Favourites.js";
+import Chat from "./../../assets/Chat.js";
 import Menu from "./../../assets/Menu.png";
 import "./SideNavbar.css";
 
@@ -26,35 +26,35 @@ export const SideNavbar = ({ auth, setAuth }) => {
       </div>
       <div className="nav-link-container">
         <Link to="/" className="nav-link">
-          <img className="navIcons" src={Home} alt="home" />
+          <Home className="navIcons"  alt="home" />
           <span className="icon-name" style={{ display: toggle ? "" : "none" }}>
             Home
           </span>
         </Link>
 
         <Link to="/playlist" className="nav-link">
-          <img className="navIcons" src={Playlist} alt="home" />
+          <Playlist className="navIcons"  alt="home" />
           <span className="icon-name" style={{ display: toggle ? "" : "none" }}>
             Playlist
           </span>
         </Link>
 
         <Link to="/favourites" className="nav-link">
-          <img className="navIcons" src={Favourites} alt="home" />
+          <Favourites className="navIcons" alt="home" />
           <span className="icon-name" style={{ display: toggle ? "" : "none" }}>
             Favourites
           </span>
         </Link>
 
         <Link to="/chat" className="nav-link">
-          <img className="navIcons" src={Chat} alt="home" />
+          <Chat className="navIcons"  alt="home" />
           <span className="icon-name" style={{ display: toggle ? "" : "none" }}>
             Chat
           </span>
         </Link>
 
         <Link to="/findFriend" className="nav-link">
-          <img className="navIcons" src={FindFriend} alt="home" />
+          <FindFriend className="navIcons"  alt="home" />
           <span className="icon-name" style={{ display: toggle ? "" : "none" }}>
             Find a Friend
           </span>
@@ -66,7 +66,7 @@ export const SideNavbar = ({ auth, setAuth }) => {
         ) : (
           <>
             <Link to="/login" className="nav-link">
-              <img className="navIcons" src={Login} alt="home" />
+              <Login className="navIcons"  alt="home" />
               <span
                 className="icon-name"
                 style={{ display: toggle ? "" : "none" }}
@@ -76,7 +76,7 @@ export const SideNavbar = ({ auth, setAuth }) => {
             </Link>
 
             <Link to="/signUp" className="nav-link">
-              <img className="navIcons" src={SignUp} alt="home" />
+              <SignUp className="navIcons"  alt="home" />
               <span
                 className="icon-name"
                 style={{ display: toggle ? "" : "none" }}

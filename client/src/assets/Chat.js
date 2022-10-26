@@ -15,4 +15,4 @@ const Chat = (props) => (
   </svg>
 )
 
-export default Chat
+export default Chat;
