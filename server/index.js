@@ -1,7 +1,10 @@
+import http from "http";
 import express from "express";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import authRoutes from "./routes/authRoutes.js";
+import { Server } from "socket.io";
+import WebSockets from "./utils/WebSockets.js";
 import pg from "pg";
 
 dotenv.config({});
@@ -38,8 +41,8 @@ pool.on("connect", (client) => {
 });
 
 const server = http.createServer(app);
-global.io = socketio.listen(server);
-global.io.on("connection", WebSockets.connection);
+const io = new Server(server);
+io.on("connection", WebSockets.connection);
 
 server.listen("5000", () => {
   console.log("Sever Listening on the port 5000");
