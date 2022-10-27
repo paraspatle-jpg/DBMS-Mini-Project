@@ -1,6 +1,7 @@
 import React,{ useState} from "react";
 import { Link } from "react-router-dom";
 import { Navigate } from "react-router-dom";
+import {useColorMode} from "../../hooks/useColorMode"
 import axios from "axios";
 import "./login.css";
 
@@ -33,12 +34,12 @@ export const Login = ({ auth, setAuth}) => {
       console.log(error);
     }
   }
-  if(auth){
-    return <Navigate to="/" replace={true} />
-  }
+  // if(auth){
+  //   return <Navigate to="/" replace={true} />
+  // }
 
   return (
-    <div className="main">
+    <div className="main" style={{background:useColorMode("white","#161716")}}>
       <label htmlFor="chk" className="white ">
         Login
       </label>
@@ -48,6 +49,7 @@ export const Login = ({ auth, setAuth}) => {
         placeholder="Email"
         onChange={handleChange}
         required="true"
+        style={{color:useColorMode("black","white")}}
       />
       <input
         className="main-elements"
@@ -55,17 +57,19 @@ export const Login = ({ auth, setAuth}) => {
         placeholder="Password"
         onChange={handleChange}
         required="true"
+        style={{color:useColorMode("black","white")}}
       />
       <button
-        className="main-elements submit-button"
+        className="submit-button"
         id="login"
         type="button"
         onClick={handleClick}
+        style={{color:useColorMode("white","black")}}
       >
         Login
       </button>
       <p className="element">Don't have an account?</p>
-      <Link to="/SignUp" className="last">
+      <Link to="/SignUp" className="last" style={{color:useColorMode("black","white")}}>
         SignUp
       </Link>
     </div>

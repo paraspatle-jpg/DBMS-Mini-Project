@@ -17,7 +17,9 @@
     margin:auto;
     font-weight: bold;
     color: #f86b6b;
-    border-bottom: 4px solid #f86b6b;
+    opacity: 1;
+    transition: all 0.1s ease-in-out;
+    /* border-bottom: 4px solid #f86b6b; */
 }
 .hero-begin{
     font-size: 22px;
@@ -27,4 +29,13 @@
     border-radius:30px;
     padding:5px 10px 10px 10px;
     margin-top:30px;
+}
+
+.suggested-songs{
+    margin-top:10px;
+}
+.suggested-songs-heading{
+    text-align:center;
+    font-size:36px;
+    font-weight:bold;
 }

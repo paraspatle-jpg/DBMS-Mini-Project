@@ -3,6 +3,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import authRoutes from "./routes/authRoutes.js";
+import favouriteRoutes from "./routes/favouriteRoutes.js"
 import { Server } from "socket.io";
 import WebSockets from "./utils/WebSockets.js";
 import pg from "pg";
@@ -24,6 +25,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/auth", authRoutes);
+app.use("/favourites", favouriteRoutes);
 
 const pool = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
@@ -35,6 +37,23 @@ const pool = new pg.Pool({
 pool.on("connect", (client) => {
   console.log("connected to the Database");
 });
+// pool
+//   .query(
+//     `
+//     create table favourites(
+//     user_id int ,
+//     song_id int ,
+//     primary key(user_id,song_id)
+//  );`
+//   )
+//   .then((res) => {
+//     console.log(res);
+//     pool.end();
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//     pool.end();
+//   });
 
 const server = http.createServer(app);
 const io = new Server(server);
@@ -72,13 +91,3 @@ export default pool;
 //     friend_id int ,
 //     primary key(user_id,friend_id)
 //   );`;
-// pool
-//   .query(userTable)
-//   .then((res) => {
-//     console.log(res);
-//     pool.end();
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//     pool.end();
-//   });

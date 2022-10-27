@@ -3,7 +3,7 @@ import pool from "../index.js"
 
 export const auth = async (req, res, next) => {
   try {
-    // console.log(req.get('authorization'));
+    console.log(req.get('authorization'));
     const token = req.get('authorization');
     // console.log(token);
     const decoded = await jwt.verify(token, process.env.JWT_SECRET_KEY);

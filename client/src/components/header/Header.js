@@ -2,6 +2,8 @@ import React from "react";
 import "./Header.css";
 import { useThemeContext } from "../../theme/ThemeProvider";
 import ReactSwitch from "react-switch";
+import {useColorMode} from "../../hooks/useColorMode"
+
 export const Header = () => {
   const { theme, changeTheme } = useThemeContext();
 
@@ -10,7 +12,7 @@ export const Header = () => {
   };
   return (
     <>
-      <div className="navbar-container">
+      <div className="navbar-container" style={{background:useColorMode("#f5f5f5", "black") }}>
         <div className="navbar-title">Strings</div>
         <div className="navbar-links">
           <ul>
