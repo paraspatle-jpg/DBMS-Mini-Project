@@ -8,6 +8,7 @@ import { Homepage } from "./pages/homepage/Homepage";
 import { FindFriend } from "./pages/findFriend/FindFriend";
 import { Chat } from "./pages/chat/Chat";
 import { Favourites } from "./pages/favourites/Favourites";
+import { Playlist } from "./pages/playlist/Playlist";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -67,6 +68,11 @@ function App() {
               exact
               path="/chat"
               element={<Chat auth={auth} setAuth={setAuth} />}
+            />
+            <Route
+              exact
+              path="/playlist"
+              element={<Playlist auth={auth} setAuth={setAuth} />}
             />
             <Route
               exact

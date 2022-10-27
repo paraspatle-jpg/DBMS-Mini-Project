@@ -42,7 +42,8 @@ const createTables = async () => {
       room_id int serial primary key,
       user_id int,
       chat_admin int
-      );`;
+      );
+      `;
   await pool
     .query(userTable)
     .then((res) => {
