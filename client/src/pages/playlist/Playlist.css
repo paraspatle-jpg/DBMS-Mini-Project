@@ -1,3 +1,43 @@
+.create-line{
+    display:flex;
+    margin:50px;
+}
+
+.create-bar{
+    width:750px;
+    padding:10px;
+    font-size:16px;
+    font-weight:50;
+    border-radius: 30px;
+    color:grey;
+    background-color: transparent;
+    border:1px solid #f86b6b;
+}
+.create-bar:hover{
+    box-shadow: 0px 0px 10px #f86b6b;
+}
+
+.create-button{ 
+    background-color:transparent;
+    border: 1px solid #f86b6b;
+    font-size: large;
+    font-weight: bold;
+    border-radius: 30px;
+    color: #f86b6b;
+    width:200px;
+    padding: 8px;
+    position:absolute;
+    right:50px;
+    cursor: pointer;
+    transition: all 0.5s;
+  }
+  
+  .create-button:hover{
+  background-color:#f86b6b;
+  color:white;
+  box-shadow: 0px 0px 10px #f86b6b;
+  }
+
 .question-block {
     text-align: left;
     display:flex;
@@ -26,7 +66,7 @@
     font-weight:200;
   }
 
-input {
+.radio-input {
     font-size: 16px;
     margin:0;
     padding:10px;
