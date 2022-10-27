@@ -6,7 +6,9 @@
     font-weight:50;
     border-radius: 30px;
     color:grey;
-    margin:25px 250px;
+    margin-left:20%;
+    margin-top:25px;
+    margin-bottom:25px;
     background-color: transparent;
     border:1px solid #f86b6b;
     outline: none;
@@ -25,9 +27,10 @@
     color: #f86b6b;
     width:200px;
     padding: 8px;
-    margin:50px 0;
+    margin-left:40%;
+    margin-top:25px;
+    margin-bottom:25px;
     position:absolute;
-    left:625px;
     cursor: pointer;
     transition: all 0.5s;
   }
