@@ -1,18 +1,17 @@
-.create-line{
-    display:flex;
-    margin:50px;
-}
-
 .create-bar{
     width:750px;
     padding:10px;
+    padding-left:275px;
     font-size:16px;
     font-weight:50;
     border-radius: 30px;
     color:grey;
+    margin:25px 250px;
     background-color: transparent;
     border:1px solid #f86b6b;
+    outline: none;
 }
+
 .create-bar:hover{
     box-shadow: 0px 0px 10px #f86b6b;
 }
@@ -26,8 +25,9 @@
     color: #f86b6b;
     width:200px;
     padding: 8px;
+    margin:50px 0;
     position:absolute;
-    right:50px;
+    left:625px;
     cursor: pointer;
     transition: all 0.5s;
   }

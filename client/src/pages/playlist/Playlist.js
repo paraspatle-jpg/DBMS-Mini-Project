@@ -5,14 +5,10 @@ export const Playlist = () => {
     <div>
         <div className="create-playlist">
             <h1>Create Playlist</h1>
-            <div className="create-line">
-                <div>
-                    <input type="text" name="playlist-name" value="Enter your playlist name here" className="create-bar" />
-                </div>
-                <div>
-                    <input type="button" name="playlist-created" value="Create" className="create-button" />
-                </div>
+            <div>
+                <input type="text" name="playlist-name" value="Enter your playlist name here" className="create-bar" />
             </div>
+            
             <div class="question-block">
                 <fieldset class="question" name="html-question-one">
                 <legend>
@@ -33,6 +29,10 @@ export const Playlist = () => {
                     </li>
                 </ul>
                 </fieldset>
+            </div>
+
+            <div>
+                <input type="button" name="playlist-created" value="Create" className="create-button" />
             </div>
         </div>
     </div>
