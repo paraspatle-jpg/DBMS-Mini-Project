@@ -6,6 +6,7 @@
   box-shadow: 0px 10px 50px black;
   position: fixed;
   width: 100%;
+  z-index:100;
 }
 .navbar-title{
   font-size:30px;

@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./HomePage.css";
 import MultiSlider from "../../components/multiSlider/SongSlider";
-import { toast } from 'react-toastify';
+import { SearchSongs } from "./../../components/searchSongs/SearchSongs.js";
+import { toast } from "react-toastify";
 
 export const Homepage = () => {
-  const [songs, setSong] = useState([1,2,3,4]);
-  const headings = ["Show Your Fandom","Explore The Beats"]
-  const [i,seti] = useState(0);
-  const [styles,setStyles] = useState({opacity:1});
+  const [songs, setSong] = useState([1, 2, 3, 4]);
+  const headings = ["Show Your Fandom", "Explore The Beats"];
+  const [i, seti] = useState(0);
+  const [styles, setStyles] = useState({ opacity: 1 });
   useEffect(() => {
     axios
       .get("https://shazam.p.rapidapi.com/charts/track", {
@@ -25,23 +26,19 @@ export const Homepage = () => {
       })
       .catch((err) => {
         console.log(err.message);
-        toast("Ooops...Failed to get Suggestions...")
+        toast("Ooops...Failed to get Suggestions...");
       });
   }, []);
 
-  
-
   useEffect(() => {
-    setTimeout(() =>{
-      setStyles({opacity: 0});
-      setTimeout(() =>{ 
-        seti((i+1)%headings.length)
-      setStyles({opacity: 1});
-      },4100)
-    },4000)
-  },[i])
-
-  
+    setTimeout(() => {
+      setStyles({ opacity: 0 });
+      setTimeout(() => {
+        seti((i + 1) % headings.length);
+        setStyles({ opacity: 1 });
+      }, 4100);
+    }, 4000);
+  }, [i]);
 
   return (
     <div>
@@ -69,6 +66,10 @@ export const Homepage = () => {
             Begin
           </div>
         </div>
+      </div>
+      <div className="search-songs">
+        <div className="search-songs-heading">Search Here...🔍</div>
+        <SearchSongs />
       </div>
       <div className="suggested-songs">
         <div className="suggested-songs-heading">Suggested Songs</div>
