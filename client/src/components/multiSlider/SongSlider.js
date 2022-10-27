@@ -8,7 +8,7 @@ import SwiperCore, {
 } from "swiper/core";
 import "swiper/swiper-bundle.css";
 import "./styles.css";
-import Favourites from "./../../assets/Favourites.js";
+import Favourites from "../../assets/Favourites.js";
 import { toast } from "react-toastify";
 import axios from "axios";
 
@@ -39,18 +39,14 @@ export default function MultiSlider({ arr, content }) {
       <Swiper
         id="swiper"
         virtual
-        slidesPerView={3}
+        autoplay={true}
+        slidesPerView={4}
         spaceBetween={10}
-        onReachEnd={() => {
-          console.log("reach end");
-          const tmp = arr.unshift();
-          arr.push(tmp);
-        }}
         navigation
       >
         {arr.map((ele, i) => {
           return (
-            <SwiperSlide key={`slide-${i}`} style={{ listStyle: "none" }}>
+            <SwiperSlide data-swiper-autoplay="2000" key={`slide-${i}`} style={{ listStyle: "none" }}>
               <div
                 className="song-card-container"
                 data-aos="fade-up"

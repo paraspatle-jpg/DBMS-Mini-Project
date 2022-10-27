@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./HomePage.css";
-import MultiSlider from "../../components/multiSlider/MultiSlider";
+import MultiSlider from "../../components/multiSlider/SongSlider";
 import { toast } from 'react-toastify';
 
 export const Homepage = () => {
-  const [songs, setSong] = useState([]);
+  const [songs, setSong] = useState([1,2,3,4]);
   const headings = ["Show Your Fandom","Explore The Beats"]
   const [i,seti] = useState(0);
   const [styles,setStyles] = useState({opacity:1});
