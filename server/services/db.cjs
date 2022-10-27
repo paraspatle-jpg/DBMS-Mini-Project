@@ -36,7 +36,14 @@ const createTables = async () => {
       user_id int ,
       friend_id int ,
       primary key(user_id,friend_id)
-    );`;
+    );
+    
+    create table chatroom(
+      room_id int serial primary key,
+      user_id int,
+      chat_admin int
+      );
+      `;
   await pool
     .query(userTable)
     .then((res) => {
