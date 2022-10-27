@@ -8,9 +8,6 @@ import SwiperCore, {
 } from "swiper/core";
 import "swiper/swiper-bundle.css";
 import "./styles.css";
-import Favourites from "../../assets/Favourites.js";
-import { toast } from "react-toastify";
-import axios from "axios";
 
 SwiperCore.use([Navigation, Pagination, Autoplay, Virtual]);
 

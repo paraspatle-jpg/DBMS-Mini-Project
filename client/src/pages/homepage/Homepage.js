@@ -3,6 +3,7 @@ import axios from "axios";
 import "./HomePage.css";
 import MultiSlider from "../../components/multiSlider/SongSlider";
 import { SearchSongs } from "./../../components/searchSongs/SearchSongs.js";
+import shazam from "../../apis/shazamApi";
 import { toast } from "react-toastify";
 
 export const Homepage = () => {
@@ -11,14 +12,8 @@ export const Homepage = () => {
   const [i, seti] = useState(0);
   const [styles, setStyles] = useState({ opacity: 1 });
   useEffect(() => {
-    axios
-      .get("https://shazam.p.rapidapi.com/charts/track", {
-        headers: {
-          "X-RapidAPI-Key":
-            "ea7e195979mshfde7ccf83fd79f7p1aee26jsn0a766891bdc0",
-          "X-RapidAPI-Host": "shazam.p.rapidapi.com",
-        },
-      })
+    shazam
+      .get("/charts/track")
       .then((res) => {
         console.log(res.data);
         setSong(res.data.tracks);

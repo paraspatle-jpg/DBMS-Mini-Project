@@ -27,7 +27,7 @@ export const FindFriend = () => {
 
           <div class="card-content">
             <div class="image">
-              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZSUyMHBpY3R1cmV8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"/>
+              <img alt="" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZSUyMHBpY3R1cmV8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"/>
             </div>
             <div class="name-profession">
               <span class="name">{people_names[0]}</span>
@@ -39,7 +39,7 @@ export const FindFriend = () => {
 
           <div class="card-content">
             <div class="image">
-              <img src={people[1]}/>
+              <img alt="" src={people[1]}/>
             </div>
             <div class="name-profession">
               <span class="name">{people_names[1]}</span>

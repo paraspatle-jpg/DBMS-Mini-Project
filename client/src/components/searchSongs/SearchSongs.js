@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import MultiSlider from "../multiSlider/SearchSongSlider";
 import ArtistMultiSlider from "../multiSlider/SearchArtistSlider";
-import axios from "axios";
+import shazam from "../../apis/shazamApi";
 import "./SearchSongs.css";
 
 export const SearchSongs = () => {
@@ -13,15 +13,11 @@ export const SearchSongs = () => {
     var value = e.target.value;
     const options = {
       method: "GET",
-      url: "https://shazam.p.rapidapi.com/search",
+      url: "/search",
       params: { term: value, locale: "en-US", offset: "0", limit: "20" },
-      headers: {
-        "X-RapidAPI-Key": "ea7e195979mshfde7ccf83fd79f7p1aee26jsn0a766891bdc0",
-        "X-RapidAPI-Host": "shazam.p.rapidapi.com",
-      },
     };
 
-    axios
+    shazam
       .request(options)
       .then(function (response) {
         console.log(response.data);
