@@ -1,16 +1,17 @@
 .nav-link-chat{
-    color:#333333;
+    color:rgb(209, 202, 202);
     text-decoration:none;
     display:block;
     /* padding-top:5px; */
     width:100%;
     height:40px;
+    margin:10px 0 10px 0;
   }
 
 .header-chat{
-  width:86%;
+  width:80%;
   position:relative;
-  background-color:#f86b6b;
+  background-color:transparent;
   height:50px;
   right:0;
   top:0;
@@ -22,7 +23,10 @@
 {
   width:100%;
   height:50px;
-  background-color:black;
+  background-color:transparent;
+  /* border:1px solid grey; */
+  display:flex;
+  border-top:none;
 }
 
 .navbar-chat{
@@ -33,28 +37,20 @@
     display:inline-block;
     height:100%;
     overflow:auto;
-    width:13%;
-    background:#F5F5F5;
+    width:19%;
+    background:transparent;
+    border-left-style:none;
     }
 
 .nav-link-chat:hover{
-   background-color:#353839;
+   background-color:black;
     color:#EFEFEF;
+    /* border:1px solid white;
+    box-shadow:0 0 10px white; */
     }
 
-.dp-chat-1{
-  border:1px solid black;
-  background-color: white;
-  border-radius:50%;
-  width:30px;
-  height:30px;
-  top:10px;
-  left:0px;
-  position:relative;
-}
-
-.dp-chat-2{
-  border:1px solid black;
+.dp-chat{
+  border:1px solid grey;
   background-color: white;
   border-radius:50%;
   width:30px;
@@ -64,6 +60,46 @@
   position:relative;
 }
 
+.search-chat{
+  width:225px;
+  height:35px;
+  margin:7px 19px;
+  align-items: center;
+  background-color:transparent;
+  border:1px solid #f86b6b;
+  border-radius:15px;
+}
+
+.navIcons-chat
+{
+  width:35px;
+  height:auto;
+  background-color:transparent;
+  margin:1px 7px;
+  float:right;
+}
+
 .messages-chat{
   width:100%;
+}
+
+.type-chat{
+  background-color:transparent;
+  height:34px;
+  margin:8px 10px;
+  width:1000px;
+  border-radius:34px;
+  border:1px solid #f86b6b;
+  /* box-shadow:0 0 10px #f86b6b; */
+}
+
+.text-chat{
+  width:80%;
+  position:relative;
+  background-color:transparent;
+  height:50px;
+  right:0;
+  bottom:-465px;
+  z-index:-1;
+  float:right;
 }

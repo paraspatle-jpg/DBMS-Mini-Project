@@ -25,11 +25,7 @@ export default function MultiSlider() {
     slides.push(
       <SwiperSlide key={`slide-${i}`} style={{ listStyle: "none" }}>
         <div className="slide" >
-          <img src={artists[i]} />
-          <div className="artist-name">
-            {names[i]}
-          </div>
-
+          <img src={artists[i]} alt="hheheh" />
         </div>
 
       </SwiperSlide>

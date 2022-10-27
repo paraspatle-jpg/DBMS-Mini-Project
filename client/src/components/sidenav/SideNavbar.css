@@ -18,24 +18,30 @@ h2 {
 }
 
 .navIcons {
-  width: 40px;
-  margin: 8px;
+  width:40px;
+  height:40px;
+  scale:1.2;
+  transition: all 0.5s ease-in-out;
+  margin:10px 10px 10px 3px;
 }
+.navIcons:hover{
+  fill:#f86969;
+}
+
 .nav-link-container{
   margin-top:80px;
 }
+
 .nav-link {
   padding: 13px;
-  color: #333333;
   text-decoration: none;
   display: block;
   text-decoration: none;
   font-weight: bold;
-  color: black;
   font-size: large;
   cursor: pointer;
   display:flex;
-
+  transition: all 0.5s ease-in-out;
 }
 
 .icon-name {
@@ -45,7 +51,7 @@ h2 {
 
 .hamburger-btn {
   position: absolute;
-  top:13px;
+  top:15px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -80,16 +86,16 @@ h2 {
   background: white;
 }
 .hamburger::after {
-  transform: translateY(8px);
+  transform: translateY(10px);
 }
 .hamburger::before {
-  transform: translateY(-8px);
+  transform: translateY(-10px);
 }
 .hamburger.dark {
   background: white;
 }
 .open .hamburger {
-  transform: translate(15px,35px);
+  transform: translate(15px,45px);
   box-shadow: none;
   background: transparent;
 }
