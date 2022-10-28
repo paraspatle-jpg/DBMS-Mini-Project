@@ -74,12 +74,6 @@ width: max-content;
 background: #364d79;
 }
 
-
-* {
-box-sizing: border-box;
-}
-
-
 #people{
 position: absolute;
 margin-left: 50px;

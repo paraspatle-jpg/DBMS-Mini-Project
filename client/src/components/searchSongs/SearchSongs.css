@@ -1,0 +1,33 @@
+.search-songs-input-container{
+    text-align: center;
+}
+
+.search-songs-input-container>input{
+    margin:10px;
+    width: 70%;
+    height: 50px;
+    border-radius:30px;
+    border:2px solid #f86b6b;
+    background-color:transparent;
+    transition: all 0.2s ease;
+    padding:0px 40px 0 20px;
+    font-size:18px;
+    color:#f86b6b;
+}
+
+.search-songs-input-container>input:focus{
+    outline: none;
+    border:3px solid #f86b6b;
+}
+
+.no-results{
+    text-align: center;
+    height:190px;
+    margin-top:100px;
+    font-size:28px;
+}
+.search-result-heading{
+    text-align: center;
+    font-size:30px;
+    font-weight:bold;
+}
