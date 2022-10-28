@@ -15,7 +15,7 @@
     font-weight:50;
     border-radius: 30px;
     color:grey;
-    margin-left:20%;
+    margin-left:25%;
     margin-top:25px;
     margin-bottom:5px;
     background-color: transparent;
@@ -111,6 +111,7 @@
 .my-playlist{
   width:80%;
   margin:auto;
+  height:469px;
   /* border:1px solid white; */
 }
 
@@ -144,11 +145,32 @@
   border-bottom:1px solid #444444;
 }
     
-    .nav-link-playlist:hover{
-    background-color:#353839;
-    color:#EFEFEF;
-    }
+.nav-link-playlist:hover{
+  background-color:#353839;
+  color:#EFEFEF;
+}
     
+/* width */
+::-webkit-scrollbar {
+  width: 20px;
+  height:20px;
+}
 
+/* Track */
+::-webkit-scrollbar-track { 
+  display: none;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: transparent; 
+  border:1px solid #f86b6b;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  box-shadow:0 0 10px #f86b6b; 
+}
 
 

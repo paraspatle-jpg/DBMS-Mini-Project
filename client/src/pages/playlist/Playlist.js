@@ -2,6 +2,10 @@ import React from 'react';
 import "./Playlist.css";
 import { Link } from "react-router-dom";
 export const Playlist = () => {
+
+    const toggleButton = document.querySelector('');
+    const divToShow= document.querySelector('');
+
   return (
     <div className="container-playlist">
         <div className="create-playlist">
@@ -42,13 +46,16 @@ export const Playlist = () => {
 
             <div className="navbar-playlist">
                 <Link class="nav-link-playlist" href="#playlist-songs">My songs</Link>
+                <div className="hidden-slider">
+
+                </div>
                 <Link class="nav-link-playlist" href="#playlist-songs">Sad songs</Link>
                 <Link class="nav-link-playlist" href="#playlist-songs">Soothing songs</Link>
+                <Link class="nav-link-playlist" href="#playlist-songs">Lofi songs</Link>
                 <Link class="nav-link-playlist last" href="#playlist-songs">Heartbreak songs</Link>
             </div>
 
             <h1 className="h1-my-playlist">Other's Playlist</h1>
-
             <div className="navbar-playlist">
                 <Link class="nav-link-playlist" href="#playlist-songs">My songs</Link>
                 <Link class="nav-link-playlist" href="#playlist-songs">Sad songs</Link>
