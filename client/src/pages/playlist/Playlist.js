@@ -1,8 +1,9 @@
 import React from 'react';
 import "./Playlist.css";
+import { Link } from "react-router-dom";
 export const Playlist = () => {
   return (
-    <div>
+    <div className="container-playlist">
         <div className="create-playlist">
             <h1>Create Playlist</h1>
             <div>
@@ -35,6 +36,27 @@ export const Playlist = () => {
                 <input type="button" name="playlist-created" value="Create" className="create-button" />
             </div>
         </div>
+
+        <div className="my-playlist">
+            <h1 className="h1-my-playlist">My Playlist</h1>
+
+            <div className="navbar-playlist">
+                <Link class="nav-link-playlist" href="#playlist-songs">My songs</Link>
+                <Link class="nav-link-playlist" href="#playlist-songs">Sad songs</Link>
+                <Link class="nav-link-playlist" href="#playlist-songs">Soothing songs</Link>
+                <Link class="nav-link-playlist last" href="#playlist-songs">Heartbreak songs</Link>
+            </div>
+
+            <h1 className="h1-my-playlist">Other's Playlist</h1>
+
+            <div className="navbar-playlist">
+                <Link class="nav-link-playlist" href="#playlist-songs">My songs</Link>
+                <Link class="nav-link-playlist" href="#playlist-songs">Sad songs</Link>
+                <Link class="nav-link-playlist" href="#playlist-songs">Soothing songs</Link>
+                <Link class="nav-link-playlist" href="#playlist-songs">Heartbreak songs</Link>
+            </div>
+        </div>
+
     </div>
   );
 };

@@ -1,5 +1,14 @@
+.container-playlist{
+  overflow:visible;
+  margin-bottom: 50px;
+}
+
+.create-playlist{
+  margin-bottom:125px;
+}
+
 .create-bar{
-    width:750px;
+    width:450px;
     padding:10px;
     padding-left:275px;
     font-size:16px;
@@ -8,7 +17,7 @@
     color:grey;
     margin-left:20%;
     margin-top:25px;
-    margin-bottom:25px;
+    margin-bottom:5px;
     background-color: transparent;
     border:1px solid #f86b6b;
     outline: none;
@@ -29,7 +38,6 @@
     padding: 8px;
     margin-left:40%;
     margin-top:25px;
-    margin-bottom:25px;
     position:absolute;
     cursor: pointer;
     transition: all 0.5s;
@@ -56,7 +64,6 @@
 .question {
     border: none;
     padding-bottom: 0;
-    
   }
 
 .answers-list {
@@ -67,6 +74,7 @@
   legend{
     font-size:16px;
     font-weight:200;
+    margin:-2px;
   }
 
 .radio-input {
@@ -100,6 +108,47 @@
     border: 2px solid white;
 }
 
+.my-playlist{
+  width:80%;
+  margin:auto;
+  /* border:1px solid white; */
+}
+
+.navbar-playlist{
+  text-align: center;
+  margin:0;
+  padding:0;
+  display:inline-block;
+  width:100%;
+  overflow:auto; 
+  height:50%;
+  z-index:1;
+  border:0.5px solid #444444;
+  }
+
+.h1-my-playlist{
+  margin:5px 0 20px;
+  }
+
+.nav-link-playlist{
+    padding:2%;
+    color:#f86b6b;
+    text-decoration:none;
+    display:block;
+    border:1px solid #444444;
+    border-collapse: collapse;
+    border-bottom:none;
+    }
+
+.last{
+  border-bottom:1px solid #444444;
+}
+    
+    .nav-link-playlist:hover{
+    background-color:#353839;
+    color:#EFEFEF;
+    }
+    
 
 
 
