@@ -43,6 +43,15 @@ const createTables = async () => {
       user_id int,
       chat_admin int
       );
+
+    select distinct  user_id
+    from favourites f1
+    where exists(
+        select null
+        from favourites f2
+        where f1.song_id=f2.song_id
+    )
+    FETCH FIRST 5 ROWS ONLY;
       `;
   await pool
     .query(userTable)
