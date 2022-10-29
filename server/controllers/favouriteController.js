@@ -1,25 +1,38 @@
 import pool from "./../index.js";
 
 export const addtoFav = async (req, res) => {
-    try{
-        const {songid} = req.params;
-        const values = [req.user.user_id,songid];
-        await pool.query("insert into favourites values($1,$2)",values);
-
-        res.status(200).send({message:"Added To Favorites"});
+  try {
+    const { songid } = req.params;
+    const song = req.body.body;
+    const values1 = [song.key]
+    const values5 = [song.key,song.title,song.subtitle,song.images.coverart,song.url]
+    const values = [req.user.user_id, songid];
+    const exist = await pool.query("select * from song where song_id=$1",values1);
+    console.log(exist.rowCount);
+    if(exist.rowCount===0){
+        await pool.query("insert into song values($1,$2,$3,$4,$5)",values5)
     }
-    catch(err){
+    await pool.query(
+        "insert into favourites values($1,$2)",
+      values
+    );
 
-    }
-}
+    return res.status(200).send({ message: "Added To Favorites" });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send({ message: err.message})
+  }
+};
 export const getFav = async (req, res) => {
-    try{
-        const values = [req.user.user_id];
-        const rows = await pool.query("select * from favourites where user_id = $1",values);
-        console.log(rows.rows);
-        res.status(200).send({favourites:rows.rows,message:"Success"});
-    }
-    catch(err){
-
-    }
-}
+  try {
+    const values = [req.user.user_id];
+    const rows = await pool.query(
+      "select * from song where song_id in (select song_id from favourites where user_id = $1)",
+      values
+    );
+    console.log(rows.rows);
+    res.status(200).send({ favourites: rows.rows, message: "Success" });
+  } catch (err) {
+    res.status(500).send({ message: err.message})
+  }
+};

@@ -3,8 +3,9 @@ import express from "express";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import authRoutes from "./routes/authRoutes.js";
-import favouriteRoutes from "./routes/favouriteRoutes.js"
-import { Server } from "socket.io";
+import favouriteRoutes from "./routes/favouriteRoutes.js";
+import playListRoutes from "./routes/playListRoutes.js";
+import {Server} from "socket.io";
 import WebSockets from "./utils/WebSockets.js";
 import pg from "pg";
 
@@ -26,6 +27,7 @@ app.use((req, res, next) => {
 
 app.use("/auth", authRoutes);
 app.use("/favourites", favouriteRoutes);
+app.use("/playlists", playListRoutes);
 
 const pool = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
@@ -39,12 +41,13 @@ pool.on("connect", (client) => {
 });
 // pool
 //   .query(
-//     `
-//     create table favourites(
-//     user_id int ,
-//     song_id int ,
-//     primary key(user_id,song_id)
-//  );`
+//     `drop table playlists;
+//     create table playlists(
+//       playlist_id serial primary key,
+//       user_id int,
+//       playlist_name varchar(255),
+//       visibility varchar(1) not null default 1
+//   );`
 //   )
 //   .then((res) => {
 //     console.log(res);
@@ -57,6 +60,7 @@ pool.on("connect", (client) => {
 
 const server = http.createServer(app);
 const io = new Server(server);
+global.io = io;
 io.on("connection", WebSockets.connection);
 
 server.listen("5000", () => {
@@ -89,5 +93,18 @@ export default pool;
 //   create table friends(
 //     user_id int ,
 //     friend_id int ,
-//     primary key(user_id,friend_id)
+//    primary key(user_id,friend_id)
+//    create table song(
+//       song_id int primary key,
+//       title varchar(255),
+//       subtitle varchar(255),
+//       image_url varchar(255),
+//       url varchar(255)
+//     );
+//     drop table favourites;
+//     create table favourites(
+//     user_id int not null,
+//     song_id int not null,
+//     primary key(user_id,song_id)
+
 //   );`;

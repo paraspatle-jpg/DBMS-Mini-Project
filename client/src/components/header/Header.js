@@ -12,7 +12,7 @@ export const Header = () => {
   };
   return (
     <>
-      <div className="navbar-container" style={{background:useColorMode("#f5f5f5", "black") }}>
+      <div className="navbar-container" id="navbar-container" style={{background:useColorMode("#f5f5f5", "black") }}>
         <div className="navbar-title">Strings</div>
         <div className="navbar-links">
           <ul>

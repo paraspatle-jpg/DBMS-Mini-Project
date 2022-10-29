@@ -10,7 +10,9 @@ import { Chat } from "./pages/chat/Chat";
 import { Favourites } from "./pages/favourites/Favourites";
 import { Playlist } from "./pages/playlist/Playlist";
 import { ToastContainer } from "react-toastify";
+import shazam from "./apis/shazamApi";
 import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import axios from "axios";
@@ -18,7 +20,20 @@ import axios from "axios";
 function App() {
   const [auth, setAuth] = useState(localStorage.getItem("data"));
   const [favourites, setfavourites] = useState([]);
+  const [songs, setSong] = useState([1, 2, 3, 4]);
   useEffect(() => {
+    shazam
+      .get("/charts/track")
+      .then((res) => {
+        console.log(res.data);
+        setSong(res.data.tracks);
+        console.log(res.data.tracks[0]);
+      })
+      .catch((err) => {
+        console.log(err.message);
+        toast("Ooops...Failed to get Suggestions...");
+      });
+
     if (auth) {
       axios
         .get("http://localhost:5000/favourites/getFav", {
@@ -28,12 +43,15 @@ function App() {
         })
         .then((res) => {
           console.log(res.data);
-          setfavourites(res.data)
-        }).catch((err) => {
-          
+          setfavourites(res.data.favourites);
         })
+        .catch((err) => {
+          console.log(err);
+        });
     }
-  }, []);
+  }, [])
+
+
 
   return (
     <Router>
@@ -47,7 +65,7 @@ function App() {
             <Route
               exact
               path="/"
-              element={<Homepage auth={auth} setAuth={setAuth} />}
+              element={<Homepage songs={songs} auth={auth} setAuth={setAuth} />}
             />
             <Route
               exact
@@ -77,7 +95,13 @@ function App() {
             <Route
               exact
               path="/favourites"
-              element={<Favourites favourites={favourites} auth={auth} setAuth={setAuth} />}
+              element={
+                <Favourites
+                  favourites={favourites}
+                  auth={auth}
+                  setAuth={setAuth}
+                />
+              }
             />
           </Routes>
         </div>

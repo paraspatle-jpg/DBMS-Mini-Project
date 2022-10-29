@@ -22,6 +22,6 @@ export const auth = async (req, res, next) => {
 
     next();
   } catch (err) {
-    res.status(403).send({ message: "Authorization Failed",err });
+    res.status(403).send({ message: "Authorization app Failed",err });
   }
 };

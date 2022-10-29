@@ -15,12 +15,12 @@ import axios from "axios";
 SwiperCore.use([Navigation, Pagination, Autoplay, Virtual]);
 
 export default function MultiSlider({ arr, content }) {
-  const handleClick = (song_id, e) => {
+  const handleClick = (song, e) => {
     // e.currentTarget.style.fill = "black";
     console.log("Paras");
     if (localStorage.getItem("data")) {
       axios
-        .post(`http://localhost:5000/favourites/addtoFav/${song_id}`,{}, {
+        .post(`http://localhost:5000/favourites/addtoFav/${song.key}`,{body:song}, {
           headers: {
             "Authorization": JSON.parse(localStorage.getItem("data")).token,
           },
@@ -70,7 +70,7 @@ export default function MultiSlider({ arr, content }) {
                     className="song-favourites"
                     style={{ height: "40px", marginTop: "-10px" }}
                   >
-                    <Favourites onClick={() => handleClick(ele.key)} />
+                    <Favourites onClick={() => handleClick(ele)} />
                   </div>
                 </div>
               </div>
