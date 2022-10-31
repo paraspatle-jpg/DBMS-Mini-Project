@@ -29,7 +29,8 @@ const createTables = async () => {
     password varchar(16) not null check (length(password)>8),
     street_address varchar(128),
     date_of_birth date,
-    artist_or_not varchar(1) not null default 0
+    artist_or_not varchar(1) not null default 0,
+    avatar int
     );
     
     create table friends(
