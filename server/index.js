@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 import authRoutes from "./routes/authRoutes.js";
 import favouriteRoutes from "./routes/favouriteRoutes.js";
 import playListRoutes from "./routes/playListRoutes.js";
-import {Server} from "socket.io";
+import { Server } from "socket.io";
 import WebSockets from "./utils/WebSockets.js";
 import pg from "pg";
 
@@ -39,15 +39,16 @@ const pool = new pg.Pool({
 pool.on("connect", (client) => {
   console.log("connected to the Database");
 });
+
 // pool
 //   .query(
-//     `drop table playlists;
-//     create table playlists(
-//       playlist_id serial primary key,
-//       user_id int,
-//       playlist_name varchar(255),
-//       visibility varchar(1) not null default 1
-//   );`
+//     `
+//     create table playlist_songs (
+//       playlist_id int not null,
+//       song_id int not null,
+//       primary key(playlist_id,song_id)
+//     );
+//     `
 //   )
 //   .then((res) => {
 //     console.log(res);
@@ -107,4 +108,32 @@ export default pool;
 //     song_id int not null,
 //     primary key(user_id,song_id)
 
+//      drop table playlists;
+//     create table playlists(
+//       playlist_id serial primary key,
+//       user_id int,
+//       playlist_name varchar(255),
+//       visibility varchar(1) not null default 1
 //   );`;
+
+
+//     `
+//   create table chatRoom (
+//   room_id serial primary key,
+//   type varchar(255),
+//   chat_admin int
+//   );
+
+//   create table roomPaticipants(
+//     room_id int not null,
+//     user_id int not null,
+//     primary key(user_id,room_id)
+//   );
+
+
+// create table chatMessage(
+//   room_id int,
+//   sender_id int,
+//   message varchar(255),
+//   messageTime timestamp not null
+// );`

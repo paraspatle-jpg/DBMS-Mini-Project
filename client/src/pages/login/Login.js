@@ -1,12 +1,13 @@
 import React,{ useState} from "react";
 import { Link } from "react-router-dom";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {useColorMode} from "../../hooks/useColorMode"
 import axios from "axios";
 import "./login.css";
 
 export const Login = ({ auth, setAuth}) => {
   const [user, setUser] = useState({ email: "", password: "" });
+  let navigate = useNavigate();
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -28,6 +29,7 @@ export const Login = ({ auth, setAuth}) => {
         console.log("Login Success")
         localStorage.setItem("data",JSON.stringify(res.data));
         setAuth(localStorage.getItem("data"));
+        navigate("/"); 
       }
 
     } catch (error) {

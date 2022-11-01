@@ -5,12 +5,16 @@ import {
   deletePlaylist,
   addSong,
   deleteSong,
+  getPlaylistSuggestions,
+  getPlaylistSongs
 } from "../controllers/playListControllers.js";
 import { auth } from "../middlewares/auth.js";
 
 const router = express.Router();
 
 router.get("/getMyPlaylists", auth, getMyPlaylists);
+router.get("/getPlaylistSuggestions", auth, getPlaylistSuggestions);
+router.get("/getPlaylistSongs/:playlist_id",getPlaylistSongs);
 router.post("/createPlaylist", auth, createPlaylist);
 router.delete("/deletePlaylist/:playlist_id", auth, deletePlaylist);
 router.post("/addSong/:playlist_id/:song_id", auth, addSong);

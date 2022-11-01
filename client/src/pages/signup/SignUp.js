@@ -1,12 +1,31 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Navigate } from "react-router-dom";
 import { useColorMode } from "../../hooks/useColorMode";
+import { SignUpModal } from "../../components/modal/SignUpModal";
 import axios from "axios";
 import "./signup.css";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export const SignUp = ({ auth, setAuth }) => {
-  const [user, setUser] = useState({ username: "", email: "", password: "" });
+  const [user, setUser] = useState({
+    username: "",
+    email: "",
+    password: "",
+    avatar: "",
+  });
+  const [display, setDisplay] = useState(null);
+  const styles = {
+    position: "fixed",
+    zIndex: "10000",
+    height: "83vh",
+    width: "88vw",
+    top: "100px",
+    right: "60px",
+    backgroundColor: "#f86969",
+    boxShadow: "1px 0px 30px black",
+    opacity: 1,
+  };
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -19,6 +38,8 @@ export const SignUp = ({ auth, setAuth }) => {
     });
   };
   const body = user;
+  let navigate = useNavigate();
+  
 
   const handleClick = async () => {
     try {
@@ -27,14 +48,18 @@ export const SignUp = ({ auth, setAuth }) => {
         console.log("Signup Success");
         localStorage.setItem("data", JSON.stringify(res.data));
         setAuth(localStorage.getItem("data"));
+        toast("Signed Up Successfully!!");
+        navigate("/"); 
       }
     } catch (error) {
       console.log(error);
+      setDisplay({});
+      toast("Sign Up Failed..Try again!!");
     }
   };
 
   // if(auth){
-  //   return <Navigate to="/" replace={true} />
+  //   return
   // }
 
   return (
@@ -76,11 +101,27 @@ export const SignUp = ({ auth, setAuth }) => {
         className="main-elements submit-button"
         id="signup"
         type="button"
-        onClick={handleClick}
+        onClick={() => {
+          setDisplay(styles);
+        }}
         style={{ color: useColorMode("white", "black") }}
       >
         SignUp
       </button>
+      <div className="modal-container" style={display}>
+        {display !== null ? (
+          <div>
+            <SignUpModal
+              handleClick={handleClick}
+              user={user}
+              setUser={setUser}
+              setDisplay={setDisplay}
+            />
+          </div>
+        ) : (
+          ""
+        )}
+      </div>
       <p className="element ">Already have an account?</p>
       <Link
         to="/Login"

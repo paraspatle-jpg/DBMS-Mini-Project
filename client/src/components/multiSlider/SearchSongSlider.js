@@ -8,31 +8,11 @@ import SwiperCore, {
 } from "swiper/core";
 import "swiper/swiper-bundle.css";
 import "./styles.css";
-import Favourites from "../../assets/Favourites.js";
-import { toast } from "react-toastify";
-import axios from "axios";
+import { SongCard } from "../songCard/SongCard";
 
 SwiperCore.use([Navigation, Pagination, Autoplay, Virtual]);
 
 export default function MultiSlider({ arr, content }) {
-  const handleClick = (song_id, e) => {
-    // e.currentTarget.style.fill = "black";
-    console.log("Paras");
-    if (localStorage.getItem("data")) {
-      axios
-        .post(`http://localhost:5000/favourites/addtoFav/${song_id}`,{}, {
-          headers: {
-            "Authorization": JSON.parse(localStorage.getItem("data")).token,
-          },
-        })
-        .then((res) => {
-          console.log(res);
-        });
-    } else {
-      console.log("Paras");
-      toast("Please Login or SignUp First");
-    }
-  };
 
   return (
     <div className="slider-container">
@@ -44,36 +24,18 @@ export default function MultiSlider({ arr, content }) {
         spaceBetween={10}
         navigation
       >
-        {arr.map(({track}, i) => {
+        {arr.map((ele, i) => {
           return (
-            <SwiperSlide data-swiper-autoplay="2000" key={`slide-${i}`} style={{ listStyle: "none" }}>
-              <div
-                className="song-card-container"
-                data-aos="fade-up"
-                data-aos-offset="100"
-                data-aos-delay="300"
-                data-aos-duration="2000"
-                data-aos-easing="ease-in-out"
-              >
-                <img
-                  className="song-img"
-                  lazyload="true"
-                  src={track.images ? track.images.coverart : ""}
-                  alt="hhe"
-                />
-                <div className="song-details">
-                  <div className="song-details-cont">
-                    <div className="song-title">{track.title}</div>
-                    <div className="song-subtitle">{track.subtitle}</div>
-                  </div>
-                  <div
-                    className="song-favourites"
-                    style={{ height: "40px", marginTop: "-10px" }}
-                  >
-                    <Favourites onClick={() => handleClick(track.key)} />
-                  </div>
-                </div>
-              </div>
+            <SwiperSlide
+              data-swiper-autoplay="2000"
+              key={`slide-${i}`}
+              style={{ listStyle: "none" }}
+            >
+              <SongCard
+                eleid={ele.track.key}
+                ele={ele.track}
+                img={ele.track.images ? ele.track.images.coverart : ""}
+              />
             </SwiperSlide>
           );
         })}

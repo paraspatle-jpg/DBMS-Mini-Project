@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { useColorMode } from "../../hooks/useColorMode.js";
-import ReactModal from "react-modal";
-import { useModal } from "react-modal-hook";
 import "./Chat.css";
 
-ReactModal.setAppElement("#root")
-
-export const Chat = () => {
+export const Chat = ({auth,seAuth}) => {
   const [chats, setChats] = useState(["Tanmayee", "Paras", "Manisha", "Devi"]);
   const [selected, setSelected] = useState(0);
-
-  const [showModal, hideModal] = useModal(() => (
-    <ReactModal closeTimeoutMS={200} isOpen>
-      <p>Modal content</p>
-      <button onClick={hideModal}>Hide modal</button>
-    </ReactModal>
-  ));
+  const [display, setDisplay] = useState(null);
+  const styles = {
+    position: "fixed",
+    zIndex: "10000",
+    height: "83vh",
+    width: "88vw",
+    top: "100px",
+    right: "60px",
+    backgroundColor: "#f86969",
+    boxShadow:"1px 0px 30px black"
+  };
 
   useEffect(() => {
     document.getElementById("navbar-container").style.boxShadow =
@@ -48,9 +48,16 @@ export const Chat = () => {
             );
           })}
         </div>
-        <div className="create-grp" onClick={showModal}>+</div>
+        <div
+          className="create-grp"
+          onClick={() => {
+            setDisplay(styles);
+          }}
+        >
+          +
+        </div>
+          <div style={display}></div>
       </div>
-      {/* <hr className="partition"></hr> */}
       <div
         className="chat-window-container"
         style={{

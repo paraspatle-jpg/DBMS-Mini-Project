@@ -1,0 +1,26 @@
+.select-playlist-heading {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.select-playlist-playlist-container{
+    width: 70%;
+    margin:auto;
+    height: 400px;
+    overflow: auto;
+}
+
+.select-playlist-playlist {
+    cursor: pointer;
+  padding: 50px;
+  text-align: center;
+  font-size: 25px;
+}
+
+.select-playlist-playlist:hover {
+  background-color: #353839;
+  color: #efefef;
+}

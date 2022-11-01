@@ -34,11 +34,13 @@ export const login = async (req, res) => {
       { user_id: user.rows[0].user_id },
       "hehehehe"
     );
+    console.log(token);
     delete user.rows[0].password;
     return res
       .status(200)
       .send({ user: user.rows[0], token, message: "Login Success" });
   } catch (err) {
+    console.log(err);
     return res.status(500).send({ message: "Something Went wrong", err });
   }
 };

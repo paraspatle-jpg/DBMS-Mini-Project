@@ -8,33 +8,24 @@ import SwiperCore, {
 } from "swiper/core";
 import "swiper/swiper-bundle.css";
 import "./styles.css";
-import Favourites from "../../assets/Favourites.js";
-import { toast } from "react-toastify";
-import axios from "axios";
+import {SelectPlaylistModal} from "../modal/SelectPlaylistModal"
+import { SongCardS } from "../songCard/SongCardS";
 
 SwiperCore.use([Navigation, Pagination, Autoplay, Virtual]);
 
-export default function MultiSlider({ arr, content }) {
-  const handleClick = (song, e) => {
-    // e.currentTarget.style.fill = "black";
-    console.log("Paras");
-    if (localStorage.getItem("data")) {
-      axios
-        .post(`http://localhost:5000/favourites/addtoFav/${song.key}`,{body:song}, {
-          headers: {
-            "Authorization": JSON.parse(localStorage.getItem("data")).token,
-          },
-        })
-        .then((res) => {
-          console.log(res);
-        });
-    } else {
-      console.log("Paras");
-      toast("Please Login or SignUp First");
-    }
-  };
+export default function MultiSlider({
+  arr,
+  favourites,
+  setfavourites,
+  setMyPlayList,
+  myPlayList,
+}) {
+  const [display, setDisplay] = React.useState(null);
+  const [temp,setTemp] = React.useState({});
+  
 
   return (
+    <>
     <div className="slider-container">
       <Swiper
         id="swiper"
@@ -46,38 +37,40 @@ export default function MultiSlider({ arr, content }) {
       >
         {arr.map((ele, i) => {
           return (
-            <SwiperSlide data-swiper-autoplay="2000" key={`slide-${i}`} style={{ listStyle: "none" }}>
-              <div
-                className="song-card-container"
-                data-aos="fade-up"
-                data-aos-offset="100"
-                data-aos-delay="300"
-                data-aos-duration="2000"
-                data-aos-easing="ease-in-out"
-              >
-                <img
-                  className="song-img"
-                  lazyload="true"
-                  src={ele.images ? ele.images.coverart : ""}
-                  alt="hhe"
-                />
-                <div className="song-details">
-                  <div className="song-details-cont">
-                    <div className="song-title">{ele.title}</div>
-                    <div className="song-subtitle">{ele.subtitle}</div>
-                  </div>
-                  <div
-                    className="song-favourites"
-                    style={{ height: "40px", marginTop: "-10px" }}
-                  >
-                    <Favourites onClick={() => handleClick(ele)} />
-                  </div>
-                </div>
-              </div>
+            <SwiperSlide
+              data-swiper-autoplay="2000"
+              key={`slide-${i}`}
+              style={{ listStyle: "none" }}
+            >
+              <SongCardS
+                eleid={ele.key}
+                ele={ele}
+                img={ele.images ? ele.images.coverart : ""}
+                favourites={favourites}
+                setfavourites={setfavourites}
+                setDisplay={setDisplay}
+                setTemp={setTemp}
+              />
             </SwiperSlide>
           );
         })}
       </Swiper>
     </div>
+    <div className="modal-container" style={display}>
+        {display !== null ? (
+          <div>
+            <SelectPlaylistModal
+              setDisplay={setDisplay}
+              myPlayList={myPlayList}
+              setMyPlayList={setMyPlayList}
+              songid={temp.eleid}
+              song={temp.ele}
+            />
+          </div>
+        ) : (
+          ""
+        )}
+      </div>
+    </>
   );
 }

@@ -7,9 +7,8 @@ export default {
       const { user_ids} = req.body;
       const chatInitiator = req.user.user_id;
       const allUserIds = [...user_ids, chatInitiator];
-
-      await pool.query({
-      })
+      
+      await pool.query("")
 
       return res.status(200).json({ success: true, chatRoom });
     } catch (error) {

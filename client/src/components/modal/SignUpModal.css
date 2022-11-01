@@ -1,0 +1,54 @@
+.heading {
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  margin: 20px;
+}
+.avatar-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+.avatar {
+  flex: 25%;
+  text-align: center;
+}
+.avatar > img {
+  border-radius: 50%;
+}
+
+.next-button {
+  background-color: black;
+  display: inline-block;
+  float: right;
+  padding: 10px 30px 10px 30px;
+  margin: 60px 130px 0 0;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.avatar-img{
+  opacity:0.7;
+}
+
+.close-btn{
+  background-color: black;
+  display: inline-block;
+  float: left;
+  padding: 10px 30px 10px 30px;
+  margin: 60px 0px 0 130px;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.waiting-container{
+  text-align: center;
+  margin: auto;
+  font-size: 30px;
+  margin-top: 100px;
+}

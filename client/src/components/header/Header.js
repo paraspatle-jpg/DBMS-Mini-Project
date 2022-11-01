@@ -4,7 +4,7 @@ import { useThemeContext } from "../../theme/ThemeProvider";
 import ReactSwitch from "react-switch";
 import {useColorMode} from "../../hooks/useColorMode"
 
-export const Header = () => {
+export const Header = ({auth}) => {
   const { theme, changeTheme } = useThemeContext();
 
   const handleNavbarClick = () => {
@@ -24,7 +24,11 @@ export const Header = () => {
                 />
               </div>
             </li>
-            <li>Profile</li>
+            {
+              auth?
+              <li>{JSON.parse(auth).user.name}</li>:""
+            }
+            
           </ul>
         </div>
       </div>

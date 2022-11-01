@@ -6,3 +6,12 @@
     font-size:40px;
     font-weight:bold;
 }
+.favourite-songs-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.favourite-song-container{
+    width:380px;
+    margin:30px;
+}

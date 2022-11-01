@@ -16,8 +16,13 @@ export const addtoFav = async (req, res) => {
         "insert into favourites values($1,$2)",
       values
     );
-
-    return res.status(200).send({ message: "Added To Favorites" });
+    const values2 = [req.user.user_id];
+    const rows = await pool.query(
+      "select * from song where song_id in (select song_id from favourites where user_id = $1)",
+      values2
+    );
+    console.log(rows.rows);
+    res.status(200).send({ favourites: rows.rows, message: "Success" });
   } catch (err) {
     console.log(err);
     return res.status(500).send({ message: err.message})
