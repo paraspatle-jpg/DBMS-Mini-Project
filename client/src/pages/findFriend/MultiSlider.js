@@ -12,26 +12,31 @@ import "./FindFriend.css";
 import { useEffect } from "react";
 import strings from "../../apis/stringsApi";
 import { toast } from "react-toastify";
+import AV1 from "./../../assets/Avatars/1.jpg";
+import AV2 from "./../../assets/Avatars/2.jpeg";
+import AV3 from "./../../assets/Avatars/3.jpg";
+import AV4 from "./../../assets/Avatars/4.jpg";
+import AV5 from "./../../assets/Avatars/5.jpg";
+import AV6 from "./../../assets/Avatars/6.jpg";
+import AV7 from "./../../assets/Avatars/6.jpg";
+import AV8 from "./../../assets/Avatars/6.jpg";
 
 SwiperCore.use([Navigation, Pagination, Autoplay, Virtual]);
 
-export default function MultiSlider() {
-  const [buttonText, setButtonText] = useState("Follow");
+export default function MultiSlider({addFriend}) {
+  const avatars = [AV1, AV2, AV3, AV4, AV5, AV6, AV7, AV8];
   const [suggestions, setSuggestions] = useState([1, 2, 3, 4]);
-
-  function Follow() {
-    if (buttonText === "Follow") {
-      setButtonText("Unfollow");
-    } else {
-      setButtonText("Follow");
-    }
-  }
 
   useEffect(() => {
     strings
-      .get("/friends/getFriendSuggestions")
+      .get("/friends/getFriendSuggestions",{
+        headers: {
+          Authorization: JSON.parse(localStorage.getItem("data")).token,
+        },
+      })
       .then((res) => {
         console.log(res.data);
+        setSuggestions(res.data.friends)
       })
       .catch((err) => {
         console.log(err);
@@ -44,7 +49,7 @@ export default function MultiSlider() {
       <Swiper
         id="swiper"
         virtual
-        slidesPerView={3}
+        slidesPerView={4}
         spaceBetween={10}
         navigation
       >
@@ -55,7 +60,22 @@ export default function MultiSlider() {
               key={`slide-${i}`}
               style={{ listStyle: "none" }}
             >
-              <div>Paras</div>
+              <div className="card-content">
+                <div className="image">
+                  <img alt="" src={avatars[suggestion.avatar]} />
+                </div>
+                <div className="name-profession">
+                  <span className="name">{suggestion.name}</span>
+                </div>
+                <div className="btn">
+                  <button
+                    className="unfollow-btn"
+                    onClick={()=>addFriend(suggestion.user_id)}
+                  >
+                    Add Friend
+                  </button>
+                </div>
+              </div>
             </SwiperSlide>
           );
         })}

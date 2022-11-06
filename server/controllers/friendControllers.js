@@ -69,8 +69,8 @@ export const getFriendSuggestions = async (req, res) => {
     where song_id in (
     select distinct  song_id
     from favourites
-    where user_id=1
-    ) and user_id<>1)
+    where user_id=$1
+    ) and user_id<>$1)
     FETCH FIRST 5 ROWS ONLY;`,
       values
     );
@@ -79,17 +79,21 @@ export const getFriendSuggestions = async (req, res) => {
       select * 
       from user_info
       where user_id in (select distinct friend_id
-                        from friends
-                        where user_id in (select distinct friend_id
-                                            from friends
-                                            where user_id=1) and user_id<>1);`,
+      from friends
+      where user_id in (select distinct friend_id
+      from friends
+      where user_id=$1) and friend_id<>$1)
+      FETCH FIRST 5 ROWS ONLY;`,
       values
     );
 
     const response = [...friends.rows, ...friends2.rows];
 
+    console.log("friends",response);
+
     res.status(200).send({ message: "Loaded Suggestions", friends: response });
   } catch (err) {
+    console.log(err);
     return res
       .status(500)
       .send({ message: "Failed to get friend suggestions", err });

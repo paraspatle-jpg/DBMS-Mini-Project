@@ -177,3 +177,20 @@ color:white;
   margin-top: 30px;
   padding:100px;
 }
+.suggestion-container{
+  display:flex;
+  justify-content:center;
+  flex-direction:column;
+  align-items:center;
+}
+.suggestion-img{
+  width:250px;
+  border-radius:10px 10px 0 0;
+
+}
+.suggestion-container>div>div{
+  background-color: #f86b6b;
+  width:250px;
+  text-align:center;
+  font-size:22px;
+}

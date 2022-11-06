@@ -185,7 +185,7 @@ export const Chat = ({ chats, groups, selected, setSelected, setGroups }) => {
         </div>
         <div className="chat-dm-list">
           {chats === undefined ? (
-            <div>paras</div>
+            <InfinitySpin color="#f86969" width="500px"/>
           ) : type === "private" ? (
             chats.map((ele, i) => {
               return (

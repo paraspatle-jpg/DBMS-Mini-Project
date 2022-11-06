@@ -124,7 +124,7 @@ export const FindFriend = ({chats,setChats,setSeleted}) => {
         )}
       </div>
       <h1>Friend Suggestions</h1>
-      <MultiSlider />
+      <MultiSlider addFriend={addFriend} />
       <div>
           <h1>People You Follow</h1>
         <div id="people">
