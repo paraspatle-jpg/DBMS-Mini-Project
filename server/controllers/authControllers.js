@@ -47,9 +47,9 @@ export const login = async (req, res) => {
 
 export const signup = async (req, res) => {
   try {
-    const { username, email, password } = req.body;
+    const { username, email, password,avatar} = req.body;
     console.log(req.body);
-    const values1 = [username, email, password];
+    const values1 = [username, email, password,avatar];
     console.log(username, email, password);
     const values2 = [email];
     const user = await pool.query(
@@ -66,7 +66,7 @@ export const signup = async (req, res) => {
     if (password.length < 8)
       return res.status(400).send({ message: "Password too short" });
     const newUser = await pool.query(
-      "INSERT INTO user_info(name, email_id, password) VALUES($1,$2,$3) RETURNING *;",
+      "INSERT INTO user_info(name, email_id, password,avatar) VALUES($1,$2,$3,$4) RETURNING *;",
       values1
     )
     // console.log(process.env.JWT_SECRET_KEY);

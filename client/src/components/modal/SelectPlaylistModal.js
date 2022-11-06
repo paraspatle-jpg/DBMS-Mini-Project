@@ -21,7 +21,7 @@ export const SelectPlaylistModal = ({
         }
       )
       .then((res) => {
-        toast("Added Successfully");
+        toast(res.data.message);
       })
       .catch((err) => {
         console.log("Failed to add song");

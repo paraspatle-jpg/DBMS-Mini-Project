@@ -5,7 +5,6 @@ import { AddToPlayList } from "./../../assets/AddToPlayList";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "./SongCard.css";
-import { SelectPlaylistModal } from "../modal/SelectPlaylistModal.js";
 
 export const SongCardS = ({
   ele,
@@ -31,6 +30,7 @@ export const SongCardS = ({
         .then((res) => {
           console.log(res.data);
           setfavourites(res.data.favourites);
+          toast.success("Added to favorites!!");
         });
     } else {
       toast("Please Login or SignUp First");

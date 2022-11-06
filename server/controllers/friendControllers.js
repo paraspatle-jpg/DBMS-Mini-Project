@@ -3,8 +3,10 @@ import pool from "./../index.js";
 // onclick of add friend button this will be triggred
 export const addFriend = async (req, res) => {
   try {
-    const values = [req.user.user_id, req.params];
+    const values = [req.user.user_id, req.params.friend_id];
+    const values1 = [req.params.friend_id, req.user.user_id];
     await pool.query("INSERT INTO friends VALUES($1,$2)", values);
+    await pool.query("INSERT INTO friends VALUES($1,$2)", values1);
     return res.status(200).send({ message: "Added to friends..." });
   } catch (err) {
     return res
@@ -16,9 +18,9 @@ export const addFriend = async (req, res) => {
 //on page load this will send list of friends
 export const getFriends = async (req, res) => {
   try {
-    const values = [req.body.user_id];
+    const values = [req.user.user_id];
     const friends = await pool.query(
-      "SELECT * FROM user_info WHERE user_id IN (SELECT friend_id FROM friends WHERE user_id=$1)",
+      "SELECT * FROM user_info u, friends f where (u.user_id = f.friend_id) and f.user_id = $1",
       values
     );
     friends.rows.map((ele) => {
@@ -26,8 +28,28 @@ export const getFriends = async (req, res) => {
       return ele;
     });
 
-    return res.status(200).send({ friends });
+    return res.status(200).send({ friends: friends.rows });
   } catch (err) {
+    console.log(err);
+    return res.status(500).send({ message: "Failed to get friends", err });
+  }
+};
+
+export const searchFriends = async (req, res) => {
+  try {
+    const value = [req.params.key + "%"];
+
+    const friends = await pool.query(
+      "select * from user_info where name like $1",
+      value
+    );
+    friends.rows.map((ele) => {
+      delete ele.password;
+      return ele;
+    });
+    return res.status(200).send({ friends: friends.rows });
+  } catch (err) {
+    console.log(err);
     return res.status(500).send({ message: "Failed to get friends", err });
   }
 };
@@ -36,11 +58,41 @@ export const getFriends = async (req, res) => {
 export const getFriendSuggestions = async (req, res) => {
   try {
     const values = [req.user.user_id];
+    console.log(values);
     const friends = await pool.query(
-      "SELECT * FROM friends WHERE "
+      `
+    select *
+    from user_info
+    where user_id in
+    (select distinct user_id
+    from favourites
+    where song_id in (
+    select distinct  song_id
+    from favourites
+    where user_id=1
+    ) and user_id<>1)
+    FETCH FIRST 5 ROWS ONLY;`,
+      values
+    );
+    const friends2 = await pool.query(
+      `
+    select distinct  *
+    from friends f1
+    where exists(
+        select null
+        from friends f2
+        where f1.friend_id=f2.friend_id
     )
+    FETCH FIRST 5 ROWS ONLY;`,
+      values
+    );
 
+    const response = [...friends.rows, ...friends2.rows];
+
+    res.status(200).send({ message: "Loaded Suggestions", friends: response });
   } catch (err) {
-    return res.status(500).send({ message: "Failed to get friend suggestions", err });
+    return res
+      .status(500)
+      .send({ message: "Failed to get friend suggestions", err });
   }
 };

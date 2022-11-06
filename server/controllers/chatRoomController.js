@@ -1,104 +1,110 @@
 import pool from "./../index.js";
 
-
 export default {
   initiate: async (req, res) => {
     try {
-      const { user_ids} = req.body;
-      const chatInitiator = req.user.user_id;
-      const allUserIds = [...user_ids, chatInitiator];
-      
-      await pool.query("")
+      const { user_id } = req.body;
+      const values = [req.user.user_id, user_id];
 
-      return res.status(200).json({ success: true, chatRoom });
-    } catch (error) {
-      return res.status(500).json({ success: false, error: error });
+      const exists = await pool.query(
+        "select * from chat where (user1=$1 and user2=$2) or (user1=$2 and user2=$1)",
+        values
+      );
+
+      if (exists.rowCount !== 0) {
+        return res.status(200).json({ success: true, exists: exists.rows });
+      }
+      const chatRoom = await pool.query(
+        "insert into chat(user1,user2) values($1,$2) returning *",
+        values
+      );
+      return res.status(200).json({ success: true, chatRoom: chatRoom.rows });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({ success: false, error: err });
     }
   },
-  postMessage: async (req, res) => {
+  initiateRoom: async (req, res) => {
     try {
-      const { room_id } = req.params;
-      const messagePayload = {
-        messageText: req.body.messageText,
-      };
-      const currentLoggedUser = req.userId;
-      const post = await ChatMessageModel.createPostInChatRoom(
-        room_id,
-        messagePayload,
-        currentLoggedUser
+      const { user_ids, room_name } = req.body;
+      const chatInitiator = req.user.user_id;
+      const allUserIds = [...user_ids, chatInitiator];
+
+      const values = [chatInitiator, room_name];
+
+      const chatRoom = await pool.query(
+        "insert into chatRoom(chat_admin,room_name) values($1,$2) returning *",
+        values
       );
-      global.io.sockets.in(roomId).emit("new message", { message: post });
-      return res.status(200).json({ success: true, post });
+      console.log(chatRoom.rows);
+      const room_id = chatRoom.rows[0].room_id;
+      allUserIds.map(async (user_id) => {
+        console.log(user_id);
+        const values1 = [user_id, room_id];
+        await pool.query(
+          "insert into roomParticipants(user_id,room_id) values($1,$2);",
+          values1
+        );
+      });
+      return res.status(200).json({ success: true, chatRoom: chatRoom.rows });
     } catch (error) {
       return res.status(500).json({ success: false, error: error });
     }
   },
   getRecentConversation: async (req, res) => {
     try {
-      const currentLoggedUser = req.userId;
-      const options = {
-        page: parseInt(req.query.page) || 0,
-        limit: parseInt(req.query.limit) || 10,
-      };
-      const rooms = await ChatRoomModel.getChatRoomsByUserId(currentLoggedUser);
-      const roomIds = rooms.map((room) => room._id);
-      const recentConversation = await ChatMessageModel.getRecentConversation(
-        roomIds,
-        options,
-        currentLoggedUser
+      const currentLoggedUser = req.user.user_id;
+      const values = [currentLoggedUser];
+
+      let rooms = await pool.query(
+        "select * from roomParticipants rp,chatRoom cr where rp.user_id = $1 and cr.room_id = rp.room_id",
+        values
       );
-      return res
-        .status(200)
-        .json({ success: true, conversation: recentConversation });
+      let chats = await pool.query(
+        "select * from chat c,user_info u where ((c.user1 = $1 and u.user_id = c.user2) or (c.user2= $1 and u.user_id = c.user1))",
+        values
+      );
+      // let chats = await pool.query(
+      //   "select * from chat where user1=$1 or user2=$1",
+      //   values
+      // );
+
+      // chats.rows.map((row)=>{
+      //   if(row.user1 === currentLoggedUser){
+          
+      //   }
+      // })
+      rooms = rooms.rows;
+      chats = chats.rows;
+      console.log(chats.rows);
+
+      return res.status(200).json({ success: true, rooms, chats });
     } catch (error) {
+      console.log(error);
       return res.status(500).json({ success: false, error: error });
     }
   },
   getConversationByRoomId: async (req, res) => {
     try {
-      const { roomId } = req.params;
-      const room = await ChatRoomModel.getChatRoomByRoomId(roomId);
-      if (!room) {
-        return res.status(400).json({
-          success: false,
-          message: "No room exists for this id",
-        });
+      const { room_id } = req.params;
+
+      var conversation;
+      const values = [typeof room_id === 'string' ? parseInt(room_id):room_id];
+      if (room_id >= 10000) {
+        conversation = await pool.query(
+          "select c.message,u.name,u.avatar,c.messagetime from chatMessage c,user_info u where c.chat_id=$1 and c.sender_id=u.user_id order by c.messagetime desc",
+          values
+        );
+      } else {
+        conversation = await pool.query(
+          "select c.message,u.name,u.avatar,c.messagetime from chatMessage c,user_info u where c.room_id=$1 and c.sender_id=u.user_id order by c.messagetime desc",
+          values
+        );
       }
-      const users = await UserModel.getUserByIds(room.userIds);
-      const options = {
-        page: parseInt(req.query.page) || 0,
-        limit: parseInt(req.query.limit) || 10,
-      };
-      const conversation = await ChatMessageModel.getConversationByRoomId(
-        roomId,
-        options
-      );
       return res.status(200).json({
         success: true,
-        conversation,
-        users,
+        conversation: conversation.rows,
       });
-    } catch (error) {
-      return res.status(500).json({ success: false, error });
-    }
-  },
-  markConversationReadByRoomId: async (req, res) => {
-    try {
-      const { roomId } = req.params;
-      const room = await ChatRoomModel.getChatRoomByRoomId(roomId);
-      if (!room) {
-        return res.status(400).json({
-          success: false,
-          message: "No room exists for this id",
-        });
-      }
-
-      const currentLoggedUser = req.userId;
-      const result = await ChatMessageModel.markMessageRead(
-        roomId,
-        currentLoggedUser
-      );
-      return res.status(200).json({ success: true, data: result });
     } catch (error) {
       console.log(error);
       return res.status(500).json({ success: false, error });

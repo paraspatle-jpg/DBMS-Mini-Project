@@ -33,8 +33,8 @@ export const getPlaylistSuggestions = async (req, res) => {
 export const getPlaylistSongs = async (req, res) => {
   try {
     const { playlist_id } = req.params;
-    const values = [playlist_id];
-
+    const values = [parseInt(playlist_id)];
+    console.log(values)
     const row = await pool.query(
       "select * from song s,playlist_songs p where s.song_id = p.song_id and p.playlist_id = $1",
       values
@@ -79,7 +79,7 @@ export const deletePlaylist = async (req, res) => {
 export const addSong = async (req, res) => {
   try {
     const song = req.body.body;
-    const values1 = [req.params.song_id];
+    const values1 = [parseInt(req.params.song_id)];
     const values5 = [
       song.key,
       song.title,
@@ -96,13 +96,13 @@ export const addSong = async (req, res) => {
       await pool.query("insert into song values($1,$2,$3,$4,$5)", values5);
     }
     const { playlist_id, song_id } = req.params;
-    const values = [playlist_id, parseInt(song_id)];
+    const values = [parseInt(playlist_id), parseInt(song_id)];
 
     exist = await pool.query(
       "select * from playlist_songs where playlist_id=$1 and song_id=$2 ",
       values
     );
-    if (exist.rowCount === 0) {
+    if (exist.rowCount !== 0) {
       console.log("hehe")
       return res.status(200).send({ message: "Song already exists!!" });
     }

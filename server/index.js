@@ -2,9 +2,12 @@ import http from "http";
 import express from "express";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
+import cors from "cors";
 import authRoutes from "./routes/authRoutes.js";
 import favouriteRoutes from "./routes/favouriteRoutes.js";
 import playListRoutes from "./routes/playListRoutes.js";
+import friendRoutes from "./routes/friendRoutes.js";
+import chatRoomRoutes from "./routes/chatRoomRoutes.js";
 import { Server } from "socket.io";
 import WebSockets from "./utils/WebSockets.js";
 import pg from "pg";
@@ -28,6 +31,8 @@ app.use((req, res, next) => {
 app.use("/auth", authRoutes);
 app.use("/favourites", favouriteRoutes);
 app.use("/playlists", playListRoutes);
+app.use("/friends", friendRoutes);
+app.use("/chat", chatRoomRoutes);
 
 const pool = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
@@ -43,15 +48,11 @@ pool.on("connect", (client) => {
 // pool
 //   .query(
 //     `
-//     create table playlist_songs (
-//       playlist_id int not null,
-//       song_id int not null,
-//       primary key(playlist_id,song_id)
-//     );
+//     select * from playlist_songs;
 //     `
 //   )
 //   .then((res) => {
-//     console.log(res);
+//     console.log(res.rows);
 //     pool.end();
 //   })
 //   .catch((err) => {
@@ -60,7 +61,11 @@ pool.on("connect", (client) => {
 //   });
 
 const server = http.createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+  cors: {
+    origin: "*",
+  },
+});
 global.io = io;
 io.on("connection", WebSockets.connection);
 
@@ -116,7 +121,6 @@ export default pool;
 //       visibility varchar(1) not null default 1
 //   );`;
 
-
 //     `
 //   create table chatRoom (
 //   room_id serial primary key,
@@ -124,16 +128,30 @@ export default pool;
 //   chat_admin int
 //   );
 
-//   create table roomPaticipants(
+//   create table roomParticipants(
 //     room_id int not null,
 //     user_id int not null,
 //     primary key(user_id,room_id)
 //   );
 
-
 // create table chatMessage(
 //   room_id int,
 //   sender_id int,
 //   message varchar(255),
-//   messageTime timestamp not null
+//   messageTime timestamp not null default current_timestamp
 // );`
+
+// create table playlist_songs (
+//         playlist_id int not null,
+//         song_id int not null,
+//         primary key(playlist_id,song_id)
+//       );
+
+//     drop table chat;
+//     create table chat (
+//       chat_id int DEFAULT NEXTVAL('chat_id_seq') primary key,
+//       user1 int,
+//       user2 int
+//     );
+//     ALTER SEQUENCE chat_id_seq RESTART WITH 10000;
+//     insert into chat (user1, user2) values (111, 111) returning *;

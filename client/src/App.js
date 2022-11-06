@@ -22,6 +22,9 @@ function App() {
   const [myPlayList, setMyPlayList] = useState([1]);
   const [playListSuggestions, setPlayListSuggestions] = useState([1]);
   const [songs, setSongs] = useState([1, 2, 3, 4]);
+  const [chats, setChats] = useState();
+  const [groups, setGroups] = useState();
+  const [selected, setSelected] = useState(0);
 
 
   useEffect(() => {
@@ -54,6 +57,7 @@ function App() {
         .catch((err) => {
           console.log(err);
         });
+        //-==========================================================
       axios
         .get("http://localhost:5000/playlists/getPlaylistSuggestions", {
           headers: {
@@ -67,6 +71,22 @@ function App() {
         .catch((err) => {
           console.log(err);
         });
+        // =================================================================
+        axios
+        .get("http://localhost:5000/chat", {
+          headers: {
+            Authorization: JSON.parse(localStorage.getItem("data")).token,
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+          setChats(res.data.chats);
+          setGroups(res.data.rooms);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
     }
   }, []);
 
@@ -125,7 +145,7 @@ function App() {
                 path="/findfriend"
                 element={
                   //============================================
-                  <FindFriend auth={auth} setAuth={setAuth} />
+                  <FindFriend auth={auth} setAuth={setAuth} chats={chats} setChats={setChats} setSelected={setSelected}/>
                   //============================================
                 }
               />
@@ -136,7 +156,7 @@ function App() {
                 path="/chat"
                 element={
                   //============================================
-                  <Chat auth={auth} setAuth={setAuth} />
+                  <Chat setGroups={setGroups} auth={auth} setAuth={setAuth} chats={chats} groups={groups} selected={selected} setSelected={setSelected} />
                   //============================================
                 }
               />

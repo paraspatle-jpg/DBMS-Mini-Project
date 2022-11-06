@@ -19,6 +19,7 @@ export const CreatePlayList = ({ setMyPlayList }) => {
       .then((res) => {
         setMyPlayList(res.data.playlists);
         console.log(res.data);
+        toast.success("Playlist created successfully!!")
       });
   };
   const handleChange = (e) => {
