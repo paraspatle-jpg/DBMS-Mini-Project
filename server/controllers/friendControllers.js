@@ -76,14 +76,13 @@ export const getFriendSuggestions = async (req, res) => {
     );
     const friends2 = await pool.query(
       `
-    select distinct  *
-    from friends f1
-    where exists(
-        select null
-        from friends f2
-        where f1.friend_id=f2.friend_id
-    )
-    FETCH FIRST 5 ROWS ONLY;`,
+      select * 
+      from user_info
+      where user_id in (select distinct friend_id
+                        from friends
+                        where user_id in (select distinct friend_id
+                                            from friends
+                                            where user_id=1) and user_id<>1);`,
       values
     );
 
