@@ -1,27 +1,150 @@
-import React from 'react'
-import "./FindFriend.css"
-import ImageSlider from "./ImageSlider";
-export const FindFriend = () => {
-  const slides = [
-    { url: "https://media.istockphoto.com/photos/young-female-rockstar-singing-in-concert-picture-id1268215945?b=1&k=20&m=1268215945&s=170667a&w=0&h=yWiwtFTs2VbGD7X72HcDVllCQMBXjSQ-65ubA9z6aww=", title: "Taylor Swift" },
-    { url: "https://images.unsplash.com/photo-1442328166075-47fe7153c128?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8ODN8fHBlb3BsZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60", title: "Alec Benjamin" },
-    { url: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTA5fHxwZW9wbGV8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60", title: "Avril Lavigne" },
-    { url: "https://images.unsplash.com/photo-1460723237483-7a6dc9d0b212?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8c2luZ2VyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60", title: "Enrique Iglesias" },
-    { url: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fHBlb3BsZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60", title: "Halsey" },
-  ];
- 
-  const containerStyles = {
-    width: "500px",
-    height: "350px",
-    margin: "0 auto",
+import React, { useEffect } from "react";
+import { useState } from "react";
+import MultiSlider from "./MultiSlider";
+import axios from "axios";
+import { InfinitySpin } from "react-loader-spinner";
+import AV1 from "./../../assets/Avatars/1.jpg";
+import AV2 from "./../../assets/Avatars/2.jpeg";
+import AV3 from "./../../assets/Avatars/3.jpg";
+import AV4 from "./../../assets/Avatars/4.jpg";
+import AV5 from "./../../assets/Avatars/5.jpg";
+import AV6 from "./../../assets/Avatars/6.jpg";
+import AV7 from "./../../assets/Avatars/6.jpg";
+import AV8 from "./../../assets/Avatars/6.jpg";
+import { toast } from "react-toastify";
+import {useNavigate} from "react-router-dom"
+
+export const FindFriend = ({chats,setChats,setSeleted}) => {
+  const avatars = [AV1, AV2, AV3, AV4, AV5, AV6, AV7, AV8];
+  const [people, setPeople] = useState([]);
+  const [searchLoading, setSearchLoading] = useState(false);
+  const [searchResults, setSearchResults] = useState([]);
+
+  const navigation = useNavigate();
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/friends/getFriends`, {
+        headers: {
+          Authorization: JSON.parse(localStorage.getItem("data")).token,
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        setPeople(response.data.friends);
+      })
+      .catch((error) => {});
+  }, []);
+
+  const handleChange = (e) => {
+    setSearchLoading(true);
+    if(e.target.value === "") {
+      setSearchLoading(false);
+      setSearchResults([]);
+      return;
+    }
+    axios
+      .get(`http://localhost:5000/friends/searchFriends/${e.target.value}`, {
+        headers: {
+          Authorization: JSON.parse(localStorage.getItem("data")).token,
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        setSearchLoading(false)
+        setSearchResults(response.data.friends);
+      })
+      .catch((error) => {});
   };
+  const addFriend = (friend_id) => {
+    axios
+      .post(`http://localhost:5000/friends/addFriend/${friend_id}`,{}, {
+        headers: {
+          Authorization: JSON.parse(localStorage.getItem("data")).token,
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        toast(response.data.message);
+      })
+      .catch((error) => {});
+  };
+
+  const handleMessage = (id) =>{
+    const body = {
+      user_id:id
+    }
+    console.log(body);
+    axios.post(`http://localhost:5000/chat/initiate`,body,{
+      headers: {
+        Authorization: JSON.parse(localStorage.getItem("data")).token,
+      }}).then((response) => {
+        navigation("/chat")
+        console.log(response.data);
+      })
+  }
+
   return (
-    <div>
-      <h1>Who To Follow</h1>
-      <div style={containerStyles}>
-        <ImageSlider slides={slides} />
+    <div className="find-friend-container">
+      <div className="search-section">
+        <h1>Search for a Friend</h1>
+        <input
+          type="text"
+          className="search-form-text"
+          placeholder="Search"
+          onChange={handleChange}
+        />
+        {searchLoading === true ? (
+          <div className="pre-text">
+            <InfinitySpin color="#f86b6b" />
+          </div>
+        ) : searchLoading === false && searchResults.length === 0 ? (
+          <div className="pre-text">Please Enter Something...</div>
+        ) : (
+          searchResults.map((people, index) => {
+            return (
+              <div className="card-content">
+                <div className="image">
+                  <img alt="" src={avatars[people.avatar]} />
+                </div>
+                <div className="name-profession">
+                  <span className="name">{people.name}</span>
+                </div>
+                <div className="btn">
+                  <button
+                    className="unfollow-btn"
+                    onClick={()=>addFriend(people.user_id)}
+                  >
+                    Add Friend
+                  </button>
+                </div>
+              </div>
+            );
+          })
+        )}
+      </div>
+      <h1>Friend Suggestions</h1>
+      <MultiSlider addFriend={addFriend} />
+      <div>
+          <h1>People You Follow</h1>
+        <div id="people">
+          {people.map((people, index) => {
+            return (
+              <div className="card-content">
+                <div className="image">
+                  <img alt="" src={avatars[people.avatar]} />
+                </div>
+                <div className="name-profession">
+                  <span className="name">{people.name}</span>
+                </div>
+                <div className="btn">
+                  <button className="unfollow-btn" onClick={()=>handleMessage(people.friend_id)}>Message</button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
-}
-
+};

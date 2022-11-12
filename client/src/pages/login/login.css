@@ -4,17 +4,19 @@
   margin-top: 15px;
   padding-left: 20px;
   border-radius: 30px;
-  border: 1px solid #f86b6b;
+  border: 2.5px solid #f86b6b;
+  background:transparent;
+  font-size:20px;
+  transition: all 0.5s;
 }
 
 .main-elements:focus {
   outline: none;
-  border:1px solid #000;
+  border:2.5px solid #000;
 }
 
 .element {
   margin-top: 30px;
-  color: black;
 }
 
 ::placeholder {
@@ -24,7 +26,6 @@
 .last {
   text-decoration: none;
   font-weight: Normal;
-  color: white;
   font-size: 16px;
 }
 
@@ -35,10 +36,18 @@ label {
   display: flex;
   margin: 60px;
   font-weight: bold;
-  color: black;
 }
 
 .submit-button {
+  height: 65px;
+  width: 90%;
+  margin-top: 15px;
+  padding-left: 20px;
+  border-radius: 30px;
+  border: 2.5px solid #f86b6b;
+  background:transparent;
+  font-size:20px;
+  transition: all 0.5s;
   margin-top: 20px;
   background-color: #f86b6b;
   font-weight: bold;
@@ -46,6 +55,9 @@ label {
   text-align: center;
   font-size: 20px;
   padding-right: 20px;
+  cursor: pointer;
+}
+.submit-button:hover{
 }
 
 .main {
@@ -62,7 +74,8 @@ label {
   min-width: 330px;
   margin: auto;
   margin-top:50px;
-  
   position: absolute;
-  left: 40%;
+  left: 30%;
+  background:#161716;
+  transition: all 0.5s;
 }
