@@ -149,6 +149,7 @@ export const Chat = ({ chats, groups, selected, setSelected, setGroups }) => {
       .then((response) => {
         console.log(response.data);
         setGroups([response.data.chatRoom[0], ...groups]);
+        toast.success("Group Create successfully!!")
       })
       .catch((err) => {
         console.log(err);

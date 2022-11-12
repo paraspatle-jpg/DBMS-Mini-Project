@@ -30,7 +30,6 @@ export default function MultiSlider({
       <Swiper
         id="swiper"
         virtual
-        autoplay={true}
         slidesPerView={4}
         spaceBetween={10}
         navigation
@@ -38,7 +37,6 @@ export default function MultiSlider({
         {arr.map((ele, i) => {
           return (
             <SwiperSlide
-              data-swiper-autoplay="2000"
               key={`slide-${i}`}
               style={{ listStyle: "none" }}
             >

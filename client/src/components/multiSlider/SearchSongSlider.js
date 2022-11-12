@@ -12,8 +12,7 @@ import { SongCard } from "../songCard/SongCard";
 
 SwiperCore.use([Navigation, Pagination, Autoplay, Virtual]);
 
-export default function MultiSlider({ arr, content }) {
-
+export default function MultiSlider({ arr, favourites, setfavourites }) {
   return (
     <div className="slider-container">
       <Swiper
@@ -35,6 +34,8 @@ export default function MultiSlider({ arr, content }) {
                 eleid={ele.track.key}
                 ele={ele.track}
                 img={ele.track.images ? ele.track.images.coverart : ""}
+                favourites={favourites}
+                setfavourites={setfavourites}
               />
             </SwiperSlide>
           );

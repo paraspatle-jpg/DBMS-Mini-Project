@@ -48,7 +48,7 @@ pool.on("connect", (client) => {
 // pool
 //   .query(
 //     `
-//     select * from playlist_songs;
+//     delete from chat;
 //     `
 //   )
 //   .then((res) => {

@@ -4,7 +4,7 @@ import ArtistMultiSlider from "../multiSlider/SearchArtistSlider";
 import shazam from "../../apis/shazamApi";
 import "./SearchSongs.css";
 
-export const SearchSongs = () => {
+export const SearchSongs = ({favourites,setfavourites}) => {
   const [state, setState] = useState("no results");
   const [tracks, setTracks] = useState([]);
   const [artist, setArtist] = useState([]);
@@ -45,7 +45,7 @@ export const SearchSongs = () => {
         ) : (
           <div>
             <div className="search-result-heading">Songs</div>
-            <MultiSlider arr={tracks} />
+            <MultiSlider arr={tracks} favourites={favourites} setfavourites={setfavourites}  />
             <div className="search-result-heading">Artists</div>
             <ArtistMultiSlider arr={artist}/>
           </div>
